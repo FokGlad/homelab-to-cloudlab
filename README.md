@@ -2,7 +2,7 @@
 
 ## Network Diagram
 
-![Network Diagram](assets/network-diagram.png)
+![Network Diagram](assets/homelab-to-cloudlab.png)
 A Devops journey documenting the migration from a self-hosted homelab to modern cloud infrastructure.
 This repository will track my architecture and networking decisions, my failures, fixes and lessons learned.
 
