@@ -1,6 +1,6 @@
 # From DevOops to DevOps
 
-A Devops journey documenting the migration from a self-hosted homelab to modern cloud infrastructure.
+A Devops journey documenting the migration from a self-hosted homelab to hybrid infrastructure.
 This repository will track my architecture and networking decisions, my failures, fixes and lessons learned.
 
 The goals are simple :
