@@ -35,8 +35,8 @@ VPS targets via the Core → Edge tunnel.
 
 ## Dashboards
 
-All metrics are displayed in Grafana, which is accessed VPN-only on the Core
-VPS. *(Specific dashboard details to be documented as they are built out.)*
+All metrics are displayed in Grafana, accessed VPN-only on the Core VPS.
+*(Specific dashboard details to be documented as they are built out.)*
 
 ## Alerting — Work In Progress
 

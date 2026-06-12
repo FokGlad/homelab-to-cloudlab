@@ -30,8 +30,8 @@ hardware sleep when it isn't needed:
 
 - **On-prem** — heavy compute + storage, shut down at night
 - **Core VPS** — always-on services + light compute
-- **Edge VPS** — reverse proxy / webserver with very light workloads (ntfy,
-  postfix)
+- **Edge VPS** — reverse proxy / webserver with very light workloads
+  (notifications, mail relay)
 
 Moving public-facing services to the edge VPS also means the homelab never
 exposes itself to the internet. All public serving happens on edge instances

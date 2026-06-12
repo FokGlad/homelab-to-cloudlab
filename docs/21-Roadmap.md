@@ -16,11 +16,8 @@
 
 ## Phase 2 — Service Migration ✅
 
+- [x] Services migrated from DMZ Pi and Proxmox to VPS (always-on availability)
 - [x] Postfix migrated to Edge VPS (ProtonMail relay)
-- [x] ntfy migrated to Edge VPS
-- [x] Vikunja, Memos migrated to Core VPS
-- [x] Grafana + Prometheus migrated to Core VPS
-- [x] SeaFile deployed on Core VPS
 - [x] FreeIPA realm established on-prem (Internal VLAN)
 - [x] All machines joined to FreeIPA (SSH auth, DNS zones, HBAC)
 
@@ -52,15 +49,11 @@
 - [ ] Gitea Runner → Portainer CI/CD as Semaphore task
 - [ ] Rolling update playbooks for the fleet
 
+## Phase 6 — Infrastructure as Code + Decommissioning (Planned)
+
 - [ ] Terraform/Pulumi definitions for VPS provisioning
-- [ ] Ansible playbooks for OS hardening and service deployment
-- [ ] Gitea Runner → Portainer CI/CD pipeline
-- [ ] Automated backup verification
-
-## Phase 6 — On-Prem Decommissioning (Future)
-
+- [ ] Ansible playbooks for on-prem OS hardening and service deployment
 - [ ] Identify candidate services for full cloud migration
-- [ ] Migrate remaining Proxmox workloads to VPS
 - [ ] Reduce on-prem footprint (keep only TrueNAS + PBS for storage)
 - [ ] Document lessons from each migration
 - [ ] Evaluate whether Proxmox PVE node can be retired or repurposed

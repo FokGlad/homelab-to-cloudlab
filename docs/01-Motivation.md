@@ -21,8 +21,8 @@ Split the infrastructure into three tiers, each optimized for its role:
 | Tier | Location | Role | Uptime |
 |------|----------|------|--------|
 | **On-prem** | Home | Heavy compute + storage | Can be shut down at night |
-| **Core VPS** | Cloud (IONOS) | Always-on services + light workloads | 24/7 |
-| **Edge VPS** | Cloud (IONOS) | Public-facing reverse proxy + lightweight services (ntfy, postfix) | 24/7 |
+| **Core VPS** | Cloud (IONOS) | Always-on containerized services | 24/7 |
+| **Edge VPS** | Cloud (IONOS) | Public-facing reverse proxy + lightweight services | 24/7 |
 
 This cuts power consumption dramatically: the most expensive hardware sleeps
 when it isn't needed, while the lightweight VPS instances (cheap to run)
@@ -38,26 +38,21 @@ Moving to hybrid wasn't **only** about energy:
   traffic terminates on the Edge VPS. The home network is never exposed.
 - **Flexibility:** VPS instances can be rebuilt, resized, or purged in minutes.
   No more flashing SD cards for a DMZ Pi.
+- **Always-on services:** Applications that benefit from 24/7 availability run
+  on the Core VPS, independent of home power and residential ISP uptime.
 - **Mail without the pain:** Postfix on the Edge VPS relays to ProtonMail's SMTP.
   No need to run a full mail stack and fight deliverability alone.
 - **Identity federation:** Centralized FreeIPA realm for SSH access control,
   permission management, and DNS zones dedicated to machine hostnames.
+- **New possibilities:** SeaFile — self-hosted file sync that needs always-on
+  availability without running on expensive home hardware. A concrete example
+  of what the hybrid architecture makes possible.
 
 ---
 
 ## What Got Migrated
 
 Services previously running on the DMZ Raspberry Pi and the Proxmox node were
-the migration candidates:
-
-| Service | Type | Origin | Destination |
-|---------|------|--------|-------------|
-| Postfix | Infra (mail) | DMZ Pi / Proxmox | Edge VPS |
-| ntfy | Infra (notifications) | Proxmox | Edge VPS |
-| Vikunja | App (tasks) | Proxmox | Core VPS |
-| Memos | App (notes) | Proxmox | Core VPS |
-| Grafana | Monitoring | Proxmox | Core VPS |
-| Prometheus | Monitoring | Proxmox | Core VPS |
-
-New services were also added after the transition (SeaFile, FreeIPA), taking
-advantage of the hybrid flexibility.
+evaluated: **would this service benefit from better uptime and always-on
+availability?** If yes, it moved to the cloud. Public-facing lightweight
+services went to the Edge VPS. Everything else stayed on-prem.

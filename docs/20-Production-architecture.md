@@ -21,21 +21,19 @@
                          ┌──────▼──────┐
                          │  Edge VPS   │
                          │             │
-                         │  - Postfix  │ → ProtonMail SMTP relay
-                         │  - ntfy     │
                          │  - Reverse  │ → Caddy/Traefik
                          │    proxy    │
+                         │  - Postfix  │ → ProtonMail SMTP relay
+                         │  - Light    │ → notifications, etc.
+                         │    services │
                          └──────┬──────┘
                                 │ WireGuard
                          ┌──────▼──────┐
                          │  Core VPS   │
                          │             │
-                         │  - Vikunja  │
-                         │  - Memos    │
-                         │  - Grafana  │
-                         │  - Prometheus│
-                         │  - SeaFile  │
                          │  - Docker   │ ← Compose stacks, Git-controlled
+                         │  - Monitoring│
+                         │  - SeaFile  │
                          └──────┬──────┘
                                 │ WireGuard (site-to-site)
                          ┌──────▼──────┐
@@ -69,17 +67,12 @@
 
 | Service | Placement | Rationale |
 |---------|-----------|-----------|
-| Postfix | Edge VPS (systemd) | Public-facing SMTP relay to ProtonMail |
-| ntfy | Edge VPS (systemd) | Lightweight push notifications, public-facing |
 | Reverse proxy | Edge VPS (systemd) | Terminates public traffic, routes to Core/on-prem |
-| Vikunja | Core VPS | Internal app, always-on |
-| Memos | Core VPS | Internal app, always-on |
-| Grafana + Prometheus | Core VPS | Monitoring, needs persistent storage |
-| Blackbox Exporter | Core VPS | HTTP/HTTPS probing (WIP) |
-| Uptime Kuma | Core VPS | Uptime monitoring (WIP) |
-| Alertmanager | Core VPS | Alert routing (WIP) |
-| SeaFile | Core VPS | File sync, heavier storage needs |
-| Docker workloads | Core VPS | Primary container host, stacks in Git |
+| Mail relay | Edge VPS (systemd) | Public-facing SMTP relay to ProtonMail |
+| Light services | Edge VPS (systemd) | Notifications and similar lightweight public services |
+| Docker containers | Core VPS | Always-on services, VPN-only, stacks in Git |
+| Monitoring stack | Core VPS | Metrics, dashboards, planned alerting |
+| SeaFile | Core VPS | Self-hosted file sync — demonstrates hybrid value |
 
 ### On-Prem
 

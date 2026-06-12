@@ -4,30 +4,16 @@
 
 ---
 
-## Migration Candidates
+## Migration Rationale
 
-Six services were identified for migration from the DMZ Raspberry Pi and
-Proxmox node:
+Services previously running on the DMZ Raspberry Pi and the Proxmox node were
+evaluated for migration. The criterion was simple: **would this service benefit
+from better uptime and always-on availability?** If yes, it was a candidate for
+the cloud.
 
-| Service | Type | Original Host | Destination |
-|---------|------|--------------|-------------|
-| **Postfix** | Infra (mail relay) | Proxmox | Edge VPS |
-| **ntfy** | Infra (push notifications) | Proxmox | Edge VPS |
-| **Vikunja** | App (task management) | Proxmox | Core VPS |
-| **Memos** | App (note-taking) | Proxmox | Core VPS |
-| **Grafana** | Monitoring | Proxmox | Core VPS |
-| **Prometheus** | Monitoring | Proxmox | Core VPS |
-
-### Selection Criteria
-
-Services were split between Core and Edge based on two questions:
-
-1. **Does it need to be public-facing?** → Edge VPS
-2. **Is it heavy compute or storage?** → stays on-prem
-3. **Is it neither?** → Core VPS (always-on, light compute)
-
-Anything that didn't need to stay on-prem (and wasn't heavy compute) was a
-candidate. Heavy storage and compute workloads stayed home.
+Services that didn't need to be public-facing and weren't heavy compute or
+storage were migrated to the Core VPS. Public-facing lightweight services went
+to the Edge VPS. Everything else stayed on-prem.
 
 ---
 
@@ -73,7 +59,7 @@ FreeIPA runs as a VM on the **Internal VLAN** (on-prem Proxmox). It provides:
 | **DNS zone** | `idm.domain.ltd` — forward and reverse records for all machine hostnames |
 | **SSH by hostname** | SSH to any machine using `ssh user@hostname.idm.domain.ltd` — no need to remember IPs |
 | **SSH key management** | Centralized `authorized_keys` via LDAP — no more per-machine key files |
-| **Authentication** | VM access is authenticated against FreeIPA (PAM/LDAP integration) |
+| **Authentication** | VM access is authenticated against FreeIPA (PAP/LDAP integration) |
 | **HBAC** | Host-Based Access Control rules — who can SSH where |
 | **Certificate authority** | Internal PKI for service certificates |
 
@@ -88,8 +74,9 @@ machines.
 The hybrid architecture also made room for services that weren't practical
 before:
 
-- **SeaFile** — self-hosted file sync (replacing Google Drive / Dropbox for
-  personal use)
+- **SeaFile** — self-hosted file sync, replacing commercial cloud storage for
+  personal use. This is a concrete example of what the hybrid architecture
+  makes possible: a storage-heavy service that needs always-on availability
+  without running 24/7 on expensive home hardware.
 - **FreeIPA** — described above
-- Monitoring stack (Grafana + Prometheus) — migrated from Proxmox to Core VPS
-  for better uptime
+- **Monitoring stack** — migrated from Proxmox to Core VPS for better uptime

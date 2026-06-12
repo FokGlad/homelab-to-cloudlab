@@ -12,14 +12,14 @@ Internet
     │  (SSH via VPN only — no public SSH)
     │
 ┌───▼────────────┐
-│   Edge VPS     │  ← Public-facing: web services, ntfy, postfix
+│   Edge VPS     │  ← Public-facing: web services, mail relay, notifications
 │   (IONOS)      │
 └───┬────────────┘
     │ WireGuard
     │
 ┌───▼────────────┐
 │   Core VPS     │  ← No public connections at all
-│   (IONOS)      │     Services: reverse proxy, DNS, auth, Docker
+│   (IONOS)      │     Services: reverse proxy, DNS, Docker
 └───┬────────────┘
     │ WireGuard (site-to-site)
     │
@@ -42,7 +42,7 @@ Internet
   port, no password auth, key-only
 - **IP forwarding enabled** — routes packets from on-prem to Edge VPS (and
   vice versa). On-prem services that need to reach Edge VPS services
-  (e.g. internal Postfix relay → Edge Postfix, on-prem service → Edge ntfy)
+  (e.g. internal Postfix relay → Edge Postfix, on-prem service → Edge notification service)
   are routed through Core VPS
 
 ### Edge VPS
