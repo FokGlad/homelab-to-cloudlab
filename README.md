@@ -35,6 +35,7 @@ every failure, every fix, and every lesson learned along the way.
 | [17-Proxmox-inventory.md](docs/17-Proxmox-inventory.md) | Full VM/CT inventory, VLAN distribution |
 | [18-Monitoring.md](docs/18-Monitoring.md) | Prometheus, Grafana, Blackbox, Uptime Kuma, Alertmanager |
 | [19-Backup-strategy.md](docs/19-Backup-strategy.md) | Current state and future plan |
+| [22-Automation.md](docs/22-Automation.md) | Ansible + Semaphore, replacing cronjobs |
 
 ### 2x — Production & Roadmap
 | File | Description |

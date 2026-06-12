@@ -43,7 +43,14 @@
 - [ ] Blu-ray archival for important documents
 - [ ] Define retention policy and replication schedule
 
-## Phase 5 — Infrastructure as Code (Planned)
+## Phase 5 — Automation (In Progress)
+
+- [x] Semaphore running on-prem as Ansible web UI
+- [x] Edge VPS rebuild playbook (full reprovisioning from scratch)
+- [x] VPS update playbooks via Semaphore (replacing ad-hoc cronjobs)
+- [ ] Migrate remaining on-prem cronjobs to Semaphore
+- [ ] Gitea Runner → Portainer CI/CD as Semaphore task
+- [ ] Rolling update playbooks for the fleet
 
 - [ ] Terraform/Pulumi definitions for VPS provisioning
 - [ ] Ansible playbooks for OS hardening and service deployment

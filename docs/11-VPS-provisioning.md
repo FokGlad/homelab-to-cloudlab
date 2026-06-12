@@ -17,9 +17,12 @@ workloads, reverse proxy, and DNS.
 | **Storage** | 240 GB |
 | **OS** | Debian (hardened) |
 
+Services run in **Docker Compose** stacks managed by Portainer.
+
 ## Edge VPS
 
-Minimal instance for public-facing services only.
+Minimal instance for public-facing services only. No Docker — all services run
+as **systemd service units** for reduced overhead and simplicity.
 
 | Spec | Value |
 |------|-------|
@@ -28,6 +31,10 @@ Minimal instance for public-facing services only.
 | **RAM** | 2 GB |
 | **Storage** | 80 GB |
 | **OS** | Debian (hardened) |
+
+The entire Edge VPS can be **reproduced from scratch** via an Ansible
+playbook. Rebuilding the instance is a matter of running the playbook against
+a fresh Debian install — no manual steps.
 
 ## Hardening (Both VPS)
 

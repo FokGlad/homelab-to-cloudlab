@@ -69,9 +69,9 @@
 
 | Service | Placement | Rationale |
 |---------|-----------|-----------|
-| Postfix | Edge VPS | Public-facing SMTP relay to ProtonMail |
-| ntfy | Edge VPS | Lightweight push notifications, public-facing |
-| Reverse proxy | Edge VPS | Terminates public traffic, routes to Core/on-prem |
+| Postfix | Edge VPS (systemd) | Public-facing SMTP relay to ProtonMail |
+| ntfy | Edge VPS (systemd) | Lightweight push notifications, public-facing |
+| Reverse proxy | Edge VPS (systemd) | Terminates public traffic, routes to Core/on-prem |
 | Vikunja | Core VPS | Internal app, always-on |
 | Memos | Core VPS | Internal app, always-on |
 | Grafana + Prometheus | Core VPS | Monitoring, needs persistent storage |
