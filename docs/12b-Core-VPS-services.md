@@ -11,9 +11,12 @@
 |---------|------|--------|
 | **Vikunja** | Task management app | VPN-only |
 | **Memos** | Note-taking app | VPN-only |
+| **SeaFile** | Self-hosted file sync | VPN-only |
 | **Grafana** | Monitoring dashboards | VPN-only |
 | **Prometheus** | Metrics collection | VPN-only (scrapes remote targets via WireGuard) |
-| **SeaFile** | Self-hosted file sync | VPN-only |
+| **Blackbox Exporter** | HTTP/HTTPS probing | WIP |
+| **Uptime Kuma** | Uptime monitoring | WIP |
+| **Alertmanager** | Alert routing | WIP |
 | **Docker** | Container runtime | Managed via Portainer |
 
 ---
@@ -39,6 +42,12 @@ sufficient for now, with off-site backup to TrueNAS via the WireGuard tunnel.
 Containers are defined as Docker Compose stacks and managed through Portainer.
 Compose files are version-controlled in the on-prem Gitea instance and pulled
 to the Core VPS for deployment.
+
+## Monitoring
+
+The full monitoring stack (Prometheus, Grafana, Blackbox, Uptime Kuma,
+Alertmanager) runs on the Core VPS. See
+[18-Monitoring.md](18-Monitoring.md) for details.
 
 ---
 

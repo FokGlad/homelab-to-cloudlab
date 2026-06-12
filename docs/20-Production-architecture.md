@@ -75,6 +75,9 @@
 | Vikunja | Core VPS | Internal app, always-on |
 | Memos | Core VPS | Internal app, always-on |
 | Grafana + Prometheus | Core VPS | Monitoring, needs persistent storage |
+| Blackbox Exporter | Core VPS | HTTP/HTTPS probing (WIP) |
+| Uptime Kuma | Core VPS | Uptime monitoring (WIP) |
+| Alertmanager | Core VPS | Alert routing (WIP) |
 | SeaFile | Core VPS | File sync, heavier storage needs |
 | Docker workloads | Core VPS | Primary container host, stacks in Git |
 

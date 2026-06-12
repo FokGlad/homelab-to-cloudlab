@@ -21,17 +21,36 @@
 - [x] Vikunja, Memos migrated to Core VPS
 - [x] Grafana + Prometheus migrated to Core VPS
 - [x] SeaFile deployed on Core VPS
-- [x] FreeIPA realm established on-prem (Internal VPS)
+- [x] FreeIPA realm established on-prem (Internal VLAN)
 - [x] All machines joined to FreeIPA (SSH auth, DNS zones, HBAC)
 
-## Phase 3 — Infrastructure as Code (In Progress)
+## Phase 3 — Monitoring & Alerting (In Progress)
+
+- [x] Prometheus + Grafana running on Core VPS
+- [x] Edge VPS Caddy metrics being scraped
+- [x] Proxmox metrics via PVE-exporter being scraped
+- [ ] Blackbox Exporter (WIP)
+- [ ] Uptime Kuma (WIP)
+- [ ] Alertmanager with defined alerting policy
+- [ ] Disk usage alerts on all nodes
+- [ ] Service downtime alerts
+- [ ] Notification target decision (ntfy vs. email)
+
+## Phase 4 — Backup Strategy (Planned)
+
+- [x] VPS data pushed to TrueNAS NFS share → Backup relay VM → PBS
+- [ ] Off-site TrueNAS replication (ZFS send/receive)
+- [ ] Blu-ray archival for important documents
+- [ ] Define retention policy and replication schedule
+
+## Phase 5 — Infrastructure as Code (Planned)
 
 - [ ] Terraform/Pulumi definitions for VPS provisioning
 - [ ] Ansible playbooks for OS hardening and service deployment
-- [ ] Docker Compose stacks fully in CI/CD pipeline
+- [ ] Gitea Runner → Portainer CI/CD pipeline
 - [ ] Automated backup verification
 
-## Phase 4 — On-Prem Decommissioning (Planned)
+## Phase 6 — On-Prem Decommissioning (Future)
 
 - [ ] Identify candidate services for full cloud migration
 - [ ] Migrate remaining Proxmox workloads to VPS

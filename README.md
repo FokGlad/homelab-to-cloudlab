@@ -33,6 +33,8 @@ every failure, every fix, and every lesson learned along the way.
 | [15-Networking.md](docs/15-Networking.md) | VLAN layout, firewall rules, switch config |
 | [16-Docker-management.md](docs/16-Docker-management.md) | Compose files, Portainer, Gitea, planned CI/CD |
 | [17-Proxmox-inventory.md](docs/17-Proxmox-inventory.md) | Full VM/CT inventory, VLAN distribution |
+| [18-Monitoring.md](docs/18-Monitoring.md) | Prometheus, Grafana, Blackbox, Uptime Kuma, Alertmanager |
+| [19-Backup-strategy.md](docs/19-Backup-strategy.md) | Current state and future plan |
 
 ### 2x — Production & Roadmap
 | File | Description |
