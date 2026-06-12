@@ -1,6 +1,7 @@
 # Production Architecture
 
-> The final hybrid state: VPS + on-prem, connected by WireGuard, proxied by Cloudflare.
+> The final hybrid state: VPS + on-prem, connected by WireGuard, proxied by
+> Cloudflare.
 
 ---
 
@@ -23,7 +24,8 @@
                          │             │
                          │  - Reverse  │ → Caddy/Traefik
                          │    proxy    │
-                         │  - Postfix  │ → ProtonMail SMTP relay
+                         │  - Mail     │ → ProtonMail SMTP relay
+                         │    relay    │
                          │  - Light    │ → notifications, etc.
                          │    services │
                          └──────┬──────┘
@@ -49,19 +51,16 @@
               └────┬────┘ └─────────┘ └──────────────────────────┘
                    │
               ┌────┴─────────────────────────────────────────────┐
-              │ On-Prem VMs & LXC (see 17-Proxmox-inventory.md) │
-              │                                                   │
-              │  Infra:  Portainer, Postfix relay, PVE-exporter,  │
-              │          Vault (WIP), Gitea Runner                │
-              │  Internal: FreeIPA, Caddy int, n8n, App-srv,      │
-              │            Home Assistant, AI VM (WIP), Backup    │
-              │  External: Caddy ext, Media-srv, Radio-srv,       │
-              │            Hermes VM                              │
-              │  VoIP:   FreePBX                                  │
-              └───────────────────────────────────────────────────┘
+              │ On-Prem VMs & LXC                               │
+              │ (see [18-Proxmox-inventory.md](18-Proxmox-inventory.md)) │
+              └──────────────────────────────────────────────────┘
 ```
 
 ## Service Placement
+
+For detailed service lists, see:
+- **Cloud services:** [13-Core-VPS-services.md](13-Core-VPS-services.md) and [14-Service-migration.md](14-Service-migration.md)
+- **On-prem VMs/CTs:** [18-Proxmox-inventory.md](18-Proxmox-inventory.md)
 
 ### Cloud
 
@@ -103,10 +102,14 @@
 - **Management interfaces** (Proxmox, TrueNAS, OPNsense): LAN-only, never
   exposed.
 
+For VLAN-level segmentation details, see [16-Networking.md](16-Networking.md).
+
 ## DNS Flow
 
-1. User visits `service.domain.tld`
+1. User visits `service.domain.ltd`
 2. DNS resolves through **Cloudflare** (proxy mode) → Edge VPS IP
 3. Cloudflare applies WAF rules, terminates TLS
 4. Request reaches Edge VPS reverse proxy (Caddy/Traefik)
 5. Reverse proxy routes to backend on Core VPS or on-prem via WireGuard
+
+For full DNS zone details, see [15-DNS-architecture.md](15-DNS-architecture.md).

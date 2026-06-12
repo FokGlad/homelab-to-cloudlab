@@ -10,7 +10,7 @@
 - **Every container runs via Docker Compose** — no standalone `docker run`
 - **All Compose files are version-controlled** in a self-hosted Gitea instance
 - **Portainer** is the management interface (no manual CLI management in production)
-- **CI/CD is planned** (see [Roadmap](21-Roadmap.md) Phase 3)
+- **CI/CD is planned** (see [Roadmap](23-Roadmap.md) Phase 3)
 
 ---
 

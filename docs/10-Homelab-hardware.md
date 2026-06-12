@@ -94,4 +94,4 @@ This was the original public-access mechanism — functional, but limited:
 - Pi in DMZ adds a device to maintain and secure
 
 This setup was replaced entirely by the Edge VPS + Cloudflare proxy approach
-described in [13-Service-migration.md](13-Service-migration.md).
+described in [14-Service-migration.md](14-Service-migration.md).

@@ -59,7 +59,7 @@ FreeIPA runs as a VM on the **Internal VLAN** (on-prem Proxmox). It provides:
 | **DNS zone** | `idm.domain.ltd` — forward and reverse records for all machine hostnames |
 | **SSH by hostname** | SSH to any machine using `ssh user@hostname.idm.domain.ltd` — no need to remember IPs |
 | **SSH key management** | Centralized `authorized_keys` via LDAP — no more per-machine key files |
-| **Authentication** | VM access is authenticated against FreeIPA (PAP/LDAP integration) |
+| **Authentication** | VM access is authenticated against FreeIPA (PAM/LDAP integration) |
 | **HBAC** | Host-Based Access Control rules — who can SSH where |
 | **Certificate authority** | Internal PKI for service certificates |
 

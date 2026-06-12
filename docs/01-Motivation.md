@@ -14,7 +14,7 @@ The obvious fix: don't run everything at home, all the time.
 
 ---
 
-## The Goal: 3-Tier Hybrid Architecture
+## The Solution: 3-Tier Hybrid Architecture
 
 Split the infrastructure into three tiers, each optimized for its role:
 
@@ -30,29 +30,29 @@ handle always-on duties.
 
 ---
 
-## Secondary Benefits
+## What Made This Worth It
 
-Moving to hybrid wasn't **only** about energy:
+Beyond energy savings, the hybrid approach unlocked things the old homelab
+couldn't do:
 
 - **Security:** No public-facing services on the homelab anymore. All public
   traffic terminates on the Edge VPS. The home network is never exposed.
-- **Flexibility:** VPS instances can be rebuilt, resized, or purged in minutes.
-  No more flashing SD cards for a DMZ Pi.
-- **Always-on services:** Applications that benefit from 24/7 availability run
-  on the Core VPS, independent of home power and residential ISP uptime.
+- **Always-on without the cost:** Services that benefit from 24/7 availability
+  run on the Core VPS, independent of home power and residential ISP uptime.
 - **Mail without the pain:** Postfix on the Edge VPS relays to ProtonMail's SMTP.
   No need to run a full mail stack and fight deliverability alone.
 - **Identity federation:** Centralized FreeIPA realm for SSH access control,
   permission management, and DNS zones dedicated to machine hostnames.
 - **New possibilities:** SeaFile — self-hosted file sync that needs always-on
-  availability without running on expensive home hardware. A concrete example
-  of what the hybrid architecture makes possible.
+  availability without running on expensive home hardware.
+- **Disposability:** VPS instances can be rebuilt from an Ansible playbook in
+  minutes. No more flashing SD cards for a DMZ Pi.
 
 ---
 
-## What Got Migrated
+## What Migrated, and Why
 
 Services previously running on the DMZ Raspberry Pi and the Proxmox node were
-evaluated: **would this service benefit from better uptime and always-on
-availability?** If yes, it moved to the cloud. Public-facing lightweight
-services went to the Edge VPS. Everything else stayed on-prem.
+evaluated against a single criterion: **would this benefit from better uptime
+and always-on availability?** If yes, it moved to the cloud. Public-facing
+lightweight services went to the Edge VPS. Everything else stayed on-prem.

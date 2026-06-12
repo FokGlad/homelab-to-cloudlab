@@ -33,7 +33,7 @@ DMZ Raspberry Pi.
 
 - Hosted on-prem, **LAN-only**
 - Handled by **dedicated internal Caddy instance** running a local DNS resolver
-- Only accessible from the **Internal VLAN** (see [15-Networking.md](15-Networking.md))
+- Only accessible from the **Internal VLAN** (see [16-Networking.md](16-Networking.md))
 - Also accessible via a **dedicated admin WireGuard tunnel** for remote access
 - Never exposed to the internet — no public records
 

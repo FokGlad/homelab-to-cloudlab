@@ -28,4 +28,4 @@ to the Core VPS for deployment.
 ---
 
 For full service placement across the entire architecture, see
-[20-Production-architecture.md](20-Production-architecture.md).
+[22-Production-architecture.md](22-Production-architecture.md).

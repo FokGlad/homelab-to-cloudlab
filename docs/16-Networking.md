@@ -36,10 +36,11 @@
 
 ### Infra VLAN
 - Dedicated to **structurally critical** infrastructure:
-  - **Gitea** — self-hosted Git (Compose file storage, Docker configs)
-  - **Postfix** — local mail relay
-  - **Vault** — secrets management
-  - **Portainer** — Docker management portal
+  - **Portainer** — Docker management
+  - **Postfix relay** — local mail relay to Edge VPS
+  - **PVE-exporter** — Proxmox metrics for Prometheus
+  - **Vault** — secrets management (WIP)
+  - **Gitea Runner** — CI/CD pipeline runner
 - Highest security segment — only admin access
 
 ### VoIP VLAN
