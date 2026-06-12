@@ -24,8 +24,23 @@ deploying specific services. This project is about the **"why"**:
 - Why a daisy-chain topology instead of a flat network?
 - Why decommission services instead of running everything forever?
 
-The answers come from constraints: cost, reliability, security, and the
-practical reality that running a data center out of your house has limits.
+The driving constraint is **energy cost**. Running a full data center at home
+24/7 adds up fast. The answer is a 3-tier split that lets the most expensive
+hardware sleep when it isn't needed:
+
+- **On-prem** — heavy compute + storage, shut down at night
+- **Core VPS** — always-on services + light compute
+- **Edge VPS** — reverse proxy / webserver with very light workloads (ntfy,
+  postfix)
+
+Moving public-facing services to the edge VPS also means the homelab never
+exposes itself to the internet. All public serving happens on edge instances
+only.
+
+The VPS transition also made a self-hosted mail solution practical: Postfix
+on the edge VPS acts as a smart relay to ProtonMail's SMTP, instead of running
+a full mail stack yourself (with all the deliverability headaches that come
+with it).
 
 This repo is both a **portfolio piece** (demonstrating real-world DevOps
 competency) and a **reference** for anyone walking a similar path.
@@ -41,10 +56,19 @@ infrastructure.
 
 ### Act 2 — The Hybrid Bridge (VPS + On-Prem)
 
-Cloud VPS provisioned and hardened. WireGuard mesh connecting cloud back to
-on-prem. Reverse proxy, TLS, DNS, and identity services stood up in the cloud.
-Docker workloads managed through version-controlled stacks. The homelab is now
-extended, not replaced.
+Two VPS instances provisioned and hardened. A WireGuard **daisy-chain**
+connects all three tiers:
+
+- **Core VPS** connects to Edge and on-prem, but denies all public
+  connections. SSH is only accessible through the VPN tunnel — no public
+  SSH access at all.
+- **Edge VPS** connects to on-prem through Core (never directly). It is
+  public-facing for web services, but SSH is also tunnel-only — no public
+  SSH access.
+
+Reverse proxy, TLS, DNS, and identity services run on the Core VPS.
+Docker workloads are managed through version-controlled stacks. The homelab
+is now extended, not replaced.
 
 ### Act 3 — The Cloudlab (Hybrid Production)
 
