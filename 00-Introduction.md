@@ -75,9 +75,9 @@ is now extended, not replaced.
 ### Act 3 — The Cloudlab (Hybrid Production)
 
 Edge VPS instances maintain public-facing availability through Cloudflare
-proxy. Core VPS handles heavy workloads, orchestration, and identity.
-On-prem services are gradually decommissioned as cloud equivalents prove
-reliable. Infrastructure is fully codified, reproducible, and documented.
+proxy. Core VPS handles heavy workloads and orchestration. On-prem services
+are gradually decommissioned as cloud equivalents prove reliable.
+Infrastructure is fully codified, reproducible, and documented.
 
 ## Guiding Principles
 

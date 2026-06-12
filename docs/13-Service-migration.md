@@ -23,7 +23,8 @@ Proxmox node:
 Services were split between Core and Edge based on two questions:
 
 1. **Does it need to be public-facing?** → Edge VPS
-2. **Does it manage sensitive data or auth?** → Core VPS (behind VPN)
+2. **Is it heavy compute or storage?** → stays on-prem
+3. **Is it neither?** → Core VPS (always-on, light compute)
 
 Anything that didn't need to stay on-prem (and wasn't heavy compute) was a
 candidate. Heavy storage and compute workloads stayed home.
