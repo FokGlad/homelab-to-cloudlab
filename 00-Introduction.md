@@ -67,8 +67,8 @@ connects all three tiers:
   public-facing for web services, but SSH is also tunnel-only — no public
   SSH access.
 
-Reverse proxy, TLS, DNS, and identity services run on the Core VPS.
-Docker workloads are managed through version-controlled stacks. FreeIPA
+Reverse proxy, TLS, and DNS services run on the Core VPS.
+Docker workloads are managed through version-controlled stacks. FreeIPA on-prem
 provides centralized SSH auth, access control, and DNS zones. The homelab
 is now extended, not replaced.
 

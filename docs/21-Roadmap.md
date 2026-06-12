@@ -21,7 +21,7 @@
 - [x] Vikunja, Memos migrated to Core VPS
 - [x] Grafana + Prometheus migrated to Core VPS
 - [x] SeaFile deployed on Core VPS
-- [x] FreeIPA realm established on Core VPS
+- [x] FreeIPA realm established on-prem (Internal VPS)
 - [x] All machines joined to FreeIPA (SSH auth, DNS zones, HBAC)
 
 ## Phase 3 — Infrastructure as Code (In Progress)

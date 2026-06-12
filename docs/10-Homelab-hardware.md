@@ -13,7 +13,7 @@
 | **Proxmox PVE** | Primary hypervisor (VMs + LXC containers) |
 | **Proxmox Backup Server** | Dedicated backup target for PVE |
 | **TrueNAS CORE** (bare metal) | NFS storage appliance |
-| **Windows machine | Workstation / misc |
+| **Windows machine** | Workstation / misc |
 
 ## Network Topology
 

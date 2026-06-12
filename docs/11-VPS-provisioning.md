@@ -7,7 +7,7 @@
 ## Core VPS
 
 The workhorse of the hybrid setup. Hosts always-on services, Docker
-workloads, reverse proxy, DNS, and identity.
+workloads, reverse proxy, and DNS.
 
 | Spec | Value |
 |------|-------|

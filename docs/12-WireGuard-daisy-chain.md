@@ -40,6 +40,10 @@ Internet
 - **Denies** all other public connections
 - **SSH is only accessible through the WireGuard tunnel** — no public SSH
   port, no password auth, key-only
+- **IP forwarding enabled** — routes packets from on-prem to Edge VPS (and
+  vice versa). On-prem services that need to reach Edge VPS services
+  (e.g. internal Postfix relay → Edge Postfix, on-prem service → Edge ntfy)
+  are routed through Core VPS
 
 ### Edge VPS
 - **Connects to on-prem through Core** — never directly

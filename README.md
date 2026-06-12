@@ -27,6 +27,7 @@ every failure, every fix, and every lesson learned along the way.
 | [10-Homelab-hardware.md](docs/10-Homelab-hardware.md) | Original on-prem hardware, network, DMZ Pi |
 | [11-VPS-provisioning.md](docs/11-VPS-provisioning.md) | IONOS VPS specs, hardening |
 | [12-WireGuard-daisy-chain.md](docs/12-WireGuard-daisy-chain.md) | WireGuard topology, SSH-only access, security model |
+| [12b-Core-VPS-services.md](docs/12b-Core-VPS-services.md) | Core VPS workloads: Vikunja, Memos, Grafana, Prometheus, SeaFile |
 | [13-Service-migration.md](docs/13-Service-migration.md) | What moved where, FreeIPA, Postfix relay, Cloudflare proxy |
 | [14-DNS-architecture.md](docs/14-DNS-architecture.md) | Four DNS zones, Caddy split, resolution flow |
 | [15-Networking.md](docs/15-Networking.md) | VLAN layout, firewall rules, switch config |

@@ -65,42 +65,20 @@ daemon, and Cloudflare still provides the same WAF + DDoS benefits.
 
 ## Identity: FreeIPA
 
-One of the major experiments enabled by the hybrid transition: deploying a
-**FreeIPA realm** as the centralized identity provider.
-
-### What FreeIPA Provides
+FreeIPA runs as a VM on the **Internal VLAN** (on-prem Proxmox). It provides:
 
 | Feature | Purpose |
 |---------|---------|
-| **SSH key management** | Centralized `authorized_keys` for all machines via LDAP |
-| **Access control** | Host-based access control rules (who can SSH where) |
-| **DNS zones** | Dedicated internal DNS zones for machine hostnames (forward + reverse) |
+| **DNS zone** | `idm.domain.ltd` — forward and reverse records for all machine hostnames |
+| **SSH by hostname** | SSH to any machine using `ssh user@hostname.idm.domain.ltd` — no need to remember IPs |
+| **SSH key management** | Centralized `authorized_keys` via LDAP — no more per-machine key files |
+| **Authentication** | VM access is authenticated against FreeIPA (PAM/LDAP integration) |
+| **HBAC** | Host-Based Access Control rules — who can SSH where |
 | **Certificate authority** | Internal PKI for service certificates |
-| **User/group management** | Central directory, no more per-machine user accounts |
 
-### Architecture
-
-FreeIPA runs on the Core VPS. All machines in the fleet (Core VPS, Edge VPS,
-and select on-prem hosts) join the realm:
-
-```
-┌─────────────────────────────┐
-│  FreeIPA (Core VPS)         │
-│                             │
-│  - LDAP directory           │
-│  - DNS zones (internal)     │
-│  - SSH key authority        │
-│  - Access control rules     │
-└──────────┬──────────────────┘
-           │
-    ┌──────┼──────┐
-    │      │      │
-  Core  Edge   On-prem
-  VPS   VPS    (selected hosts)
-```
-
-No more managing `/etc/ssh/authorized_keys` on individual machines. Access is
-controlled centrally through FreeIPA's HBAC (Host-Based Access Control) rules.
+All machines in the fleet (Core VPS, Edge VPS, and on-prem hosts) join the
+FreeIPA realm. No more managing `/etc/ssh/authorized_keys` on individual
+machines.
 
 ---
 

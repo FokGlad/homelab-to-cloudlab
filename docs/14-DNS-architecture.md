@@ -43,10 +43,11 @@ network (dashboards, admin panels, internal APIs).
 ### `ext.domain.ltd` — External (On-Prem Services)
 
 - Hosted on-prem, split access model:
-  - **Locally**: accessible via a **dedicated external Caddy instance**
+  - **Locally**: accessible via **dedicated external Caddy instance**
     (separate from the internal one)
-  - **Externally**: accessible via a **dedicated VPN tunnel** (separate from
-    the admin tunnel)
+  - **Externally**: accessible via a **dedicated VPN tunnel** — this is a
+    separate tunnel from the admin tunnel, specifically for reaching on-prem
+    external services from outside
 - Runs on the **External VLAN**
 - For services hosted on-prem that you want to reach from outside, without
   putting them on the VPS
