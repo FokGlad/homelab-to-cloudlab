@@ -144,8 +144,7 @@ the homelab.
 
 ### Phase 3 — Infrastructure as Code
 
-- [ ] Terraform/Pulumi definitions for VPS provisioning
-- [ ] Ansible playbooks for OS hardening
+- [ ] Ansible playbooks for OS hardening and VPS bootstrapping
 - [ ] Docker Compose stacks fully in CI/CD pipeline
 
 ### Phase 4 — Decommissioning
