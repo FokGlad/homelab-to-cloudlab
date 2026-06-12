@@ -30,7 +30,6 @@
                          ┌──────▼──────┐
                          │  Core VPS   │
                          │             │
-                         │  - FreeIPA  │ ← SSH auth, DNS zones, access control
                          │  - Vikunja  │
                          │  - Memos    │
                          │  - Grafana  │
@@ -44,28 +43,61 @@
                          │  (home)     │
                          └──────┬──────┘
                                 │
-                    ┌───────────┼───────────┐
-                    │           │           │
-              ┌─────▼───┐ ┌────▼────┐ ┌───▼──────────┐
-              │ Proxmox │ │ TrueNAS │ │ PBS          │
-              │ PVE     │ │ CORE    │ │ (Backup Srv) │
-              └─────────┘ └─────────┘ └──────────────┘
+                    ┌───────────┼───────────────────────┐
+                    │           │                       │
+              ┌─────▼───┐ ┌────▼────┐ ┌───────────────▼──────────┐
+              │ Proxmox │ │ TrueNAS │ │ PBS                      │
+              │ PVE     │ │ CORE    │ │ (Backup Srv)             │
+              └────┬────┘ └─────────┘ └──────────────────────────┘
+                   │
+              ┌────┴─────────────────────────────────────────────┐
+              │ On-Prem VMs & LXC (see 17-Proxmox-inventory.md) │
+              │                                                   │
+              │  Infra:  Portainer, Postfix relay, PVE-exporter,  │
+              │          Vault (WIP), Gitea Runner                │
+              │  Internal: FreeIPA, Caddy int, n8n, App-srv,      │
+              │            Home Assistant, AI VM (WIP), Backup    │
+              │  External: Caddy ext, Media-srv, Radio-srv,       │
+              │            Hermes VM                              │
+              │  VoIP:   FreePBX                                  │
+              └───────────────────────────────────────────────────┘
 ```
 
 ## Service Placement
+
+### Cloud
 
 | Service | Placement | Rationale |
 |---------|-----------|-----------|
 | Postfix | Edge VPS | Public-facing SMTP relay to ProtonMail |
 | ntfy | Edge VPS | Lightweight push notifications, public-facing |
 | Reverse proxy | Edge VPS | Terminates public traffic, routes to Core/on-prem |
-| FreeIPA | Core VPS | Central auth/DNS — must be VPN-only |
-| Vikunja | Core VPS | Internal app, no need for public exposure |
-| Memos | Core VPS | Internal app |
+| Vikunja | Core VPS | Internal app, always-on |
+| Memos | Core VPS | Internal app, always-on |
 | Grafana + Prometheus | Core VPS | Monitoring, needs persistent storage |
 | SeaFile | Core VPS | File sync, heavier storage needs |
 | Docker workloads | Core VPS | Primary container host, stacks in Git |
-| Storage / backups | On-prem (TrueNAS + PBS) | Heavy storage stays home, power-optional |
+
+### On-Prem
+
+| Service | Placement | VLAN | Rationale |
+|---------|-----------|------|-----------|
+| FreeIPA | VM | Internal | Central auth/DNS — must be VPN-only |
+| Portainer | CT | Infra | Docker management |
+| Gitea | CT | Infra | Compose file storage |
+| Caddy int | CT | Internal | `int.domain.ltd` reverse proxy |
+| Caddy ext | CT | External | `ext.domain.ltd` reverse proxy |
+| Media-srv | VM | External | Arr stack, Jellyfin — heavy compute, can sleep |
+| Radio-srv | VM | External | Azuracast — broadcast via Edge VPS web player |
+| Home Assistant | VM | Internal | Smart home hub |
+| App-srv | VM | Internal | Internal-only applications |
+| n8n | CT | Internal | Workflow automation |
+| Postfix relay | CT | Infra | Forwards mail to Edge VPS |
+| Hermes VM | VM | External | Agent host |
+| FreePBX | CT | VoIP | Telephony |
+| Backup relay | VM | Internal | Dual-backup: TrueNAS sync → PBS |
+| Vault | CT | Infra | WIP — training |
+| AI VM | VM | Internal | WIP — voice pipeline |
 
 ## Security Boundaries
 

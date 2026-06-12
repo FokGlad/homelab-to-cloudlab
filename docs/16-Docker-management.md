@@ -18,9 +18,9 @@
 
 | Component | Role | Placement |
 |-----------|------|-----------|
-| **Gitea** | Self-hosted Git repository for all Compose files and configs | Infra VLAN |
-| **Portainer** | Docker management UI/API | Infra VLAN |
-| **Docker Engine** | Container runtime | Proxmox LXC/VMs (on-prem) + Core VPS |
+| **Gitea** | Self-hosted Git repository for all Compose files and configs | Infra VLAN (CT) |
+| **Portainer** | Docker management UI/API | Infra VLAN (CT) |
+| **Docker Engine** | Container runtime | Proxmox LXC containers + Core VPS |
 
 Both Gitea and Portainer live on the **Infra VLAN** — the most restricted
 segment — because they are structurally critical infrastructure.
@@ -53,31 +53,7 @@ Portainer recreates containers on the target host
   after pushing to Gitea
 
 ### Planned CI/CD
-- A **Gitea Runner** will watch for pushes to the main branch
+- A **Gitea Runner** (CT on Infra VLAN) will watch for pushes to the main
+  branch
 - On push, it calls the **Portainer API** to redeploy the affected stack
 - This gives a full GitOps workflow: push to Gitea → automatic redeploy
-
----
-
-## Service Categories
-
-Docker workloads fall into three categories:
-
-| Category | Examples | Placement |
-|----------|----------|-----------|
-| **Infra services** | Gitea, Portainer, Vault, FreeIPA | Infra VLAN (on-prem) |
-| **App services** | Vikunja, Memos, SeaFile, ntfy | Core VPS / External VLAN |
-| **Monitoring** | Grafana, Prometheus | Core VPS |
-
----
-
-## Portainer Management
-
-Portainer runs as a container itself and manages:
-
-- **On-prem Docker hosts** (Proxmox LXC containers running Docker)
-- **Core VPS Docker** (remote agent)
-
-Stacks are defined in Portainer using the Compose files from Gitea. This means
-the Gitea repo is the **source of truth** — Portainer is just the execution
-layer.
