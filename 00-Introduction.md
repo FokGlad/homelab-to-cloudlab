@@ -7,9 +7,9 @@
 
 ## Who Am I?
 
-I'm a self-taught infrastructure enthusiast and career-changer transitioning into
-DevOps and Cloud Architecture. I hold an **AWS Cloud Practitioner** certification
-and I'm pursuing the **AWS Solutions Architect Associate** along the way.
+A self-taught infrastructure enthusiast and career-changer transitioning into
+DevOps and Cloud Architecture. Holds an **AWS Cloud Practitioner** certification
+and pursuing the **AWS Solutions Architect Associate**.
 
 Rather than studying from slides alone, I learn by building. This repository is
 the living record of that build.
@@ -50,9 +50,10 @@ competency) and a **reference** for anyone walking a similar path.
 ### Act 1 — The Homelab (On-Premise)
 
 A Proxmox hypervisor, TrueNAS storage, and an OPNsense firewall running on
-dedicated hardware. Everything accessible via WireGuard VPN only. No public
-services. A solid foundation, but single-homed and constrained by residential
-infrastructure.
+dedicated hardware. A Cisco SG-300 managed switch handling VLAN segmentation.
+A Raspberry Pi in the DMZ running Cloudflare Tunnels for public access.
+Everything accessible via WireGuard VPN only. A solid foundation, but
+single-homed, power-hungry, and constrained by residential infrastructure.
 
 ### Act 2 — The Hybrid Bridge (VPS + On-Prem)
 
@@ -67,15 +68,16 @@ connects all three tiers:
   SSH access.
 
 Reverse proxy, TLS, DNS, and identity services run on the Core VPS.
-Docker workloads are managed through version-controlled stacks. The homelab
+Docker workloads are managed through version-controlled stacks. FreeIPA
+provides centralized SSH auth, access control, and DNS zones. The homelab
 is now extended, not replaced.
 
 ### Act 3 — The Cloudlab (Hybrid Production)
 
-Edge VPS instances maintain public-facing availability. Core VPS handles heavy
-workloads and orchestration. On-prem services are gradually sunset as cloud
-equivalents prove reliable. Infrastructure is fully codified, reproducible, and
-documented.
+Edge VPS instances maintain public-facing availability through Cloudflare
+proxy. Core VPS handles heavy workloads, orchestration, and identity.
+On-prem services are gradually decommissioned as cloud equivalents prove
+reliable. Infrastructure is fully codified, reproducible, and documented.
 
 ## Guiding Principles
 
