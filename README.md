@@ -18,7 +18,7 @@ every failure, every fix, and every lesson learned along the way.
 ### 0x — Introduction & Motivation
 | File | Description |
 |------|-------------|
-| [00-Introduction.md](docs/00-Introduction.md) | Project overview, three acts, guiding principles |
+| [00-Introduction.md](00-Introduction.md) | Project overview, three acts, guiding principles |
 | [01-Motivation.md](docs/01-Motivation.md) | Energy cost, constraints, why hybrid, migration candidates |
 
 ### 1x — Setup & Migration
@@ -28,6 +28,9 @@ every failure, every fix, and every lesson learned along the way.
 | [11-VPS-provisioning.md](docs/11-VPS-provisioning.md) | IONOS VPS specs, hardening |
 | [12-WireGuard-daisy-chain.md](docs/12-WireGuard-daisy-chain.md) | WireGuard topology, SSH-only access, security model |
 | [13-Service-migration.md](docs/13-Service-migration.md) | What moved where, FreeIPA, Postfix relay, Cloudflare proxy |
+| [14-DNS-architecture.md](docs/14-DNS-architecture.md) | Four DNS zones, Caddy split, resolution flow |
+| [15-Networking.md](docs/15-Networking.md) | VLAN layout, firewall rules, switch config |
+| [16-Docker-management.md](docs/16-Docker-management.md) | Compose files, Portainer, Gitea, planned CI/CD |
 
 ### 2x — Production & Roadmap
 | File | Description |
