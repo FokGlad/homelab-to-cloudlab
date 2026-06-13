@@ -1,7 +1,7 @@
 # Monitoring Stack
 
-> All monitoring is hosted on the Core VPS. Foundation is up and running;
-> alerting is a work in progress.
+> All monitoring is hosted on the Core VPS. Foundation is running; alerting is
+> a work in progress.
 
 ---
 
@@ -17,46 +17,46 @@
 
 ---
 
-## What Prometheus Monitors
+## What Prometheus Scrapes
 
 Prometheus scrapes metrics from targets across the entire hybrid architecture
-via the WireGuard tunnel:
+via the WireGuard daisy-chain:
 
-| Target | What's scraped |
-|--------|---------------|
-| **Edge VPS** | Caddy metrics (request rate, latency, errors) |
-| **Core VPS** | Node metrics (CPU, RAM, disk, network) |
-| **Proxmox node** | PVE metrics via PVE-exporter (on-prem CT) |
-| **Both VPS** | Node-exporter metrics |
+| Target | What's Scraped |
+|--------|----------------|
+| **Edge VPS** | Caddy metrics (request rate, latency, errors) via Node Exporter |
+| **Core VPS** | Node metrics (CPU, RAM, disk, network) via Node Exporter |
+| **Proxmox node** | PVE metrics via PVE-exporter (on-prem LXC container) |
 
-All targets are reachable through the WireGuard daisy-chain — Prometheus on
-the Core VPS scrapes on-prem targets via the site-to-site tunnel, and Edge
-VPS targets via the Core → Edge tunnel.
-
-## Dashboards
-
-All metrics are displayed in Grafana, accessed VPN-only on the Core VPS.
-*(Specific dashboard details to be documented as they are built out.)*
-
-## Alerting — Work In Progress
-
-No alerts are configured yet. The alerting policy is still being defined.
-Planned alerts include:
-
-- Service downtime (via Blackbox / Uptime Kuma)
-- Disk usage thresholds on all nodes
-- High CPU / memory usage
-- WireGuard tunnel connectivity loss
-- Caddy error rate spikes
-- Proxmox node health
-
-### Pending Decisions
-
-- **Notification target:** ntfy (already running on Edge VPS), and/or email
-  via the Edge Postfix → ProtonMail relay
-- **Severity levels:** what's a page vs. a log vs. a quiet notification
-- **Thresholds:** specific values for disk, CPU, memory alerts per node
+All targets are reachable through the WireGuard tunnel — Prometheus on the
+Core VPS scrapes on-prem targets via the site-to-site tunnel, and Edge VPS
+targets via the Core → Edge leg.
 
 ---
 
-*Last updated: June 2026.*
+## Dashboards
+
+Grafana renders all metrics from Prometheus. The dashboards cover:
+infrastructure health (CPU, memory, disk, network) for every node, and
+application-level metrics (Caddy request rates, error rates).
+
+Grafana is accessed **VPN-only** on the Core VPS — no public exposure.
+
+---
+
+## Alerting — Planned
+
+No alerts are configured yet. The alerting stack (Alertmanager + notifiers)
+still needs to be stood up and tuned. The planned alert categories are:
+
+- **Service downtime** — detected via Blackbox Exporter or Uptime Kuma
+- **Resource thresholds** — disk, CPU, memory on all nodes
+- **Tunnel health** — WireGuard connectivity loss between any pair of sites
+- **Application errors** — Caddy error rate spikes, container restarts
+
+### Open Questions
+
+- **Notification target:** ntfy (already running on Edge VPS) and/or email via
+  the Edge Postfix → ProtonMail relay
+- **Severity levels:** what pages vs. logs vs. silently records
+- **Thresholds:** per-node values for disk, CPU, memory warnings and criticals
