@@ -11,7 +11,7 @@
 |------|--------|------------|---------|
 | **Public** | `domain.ltd` | Cloudflare | Public-facing services |
 | **Internal** | `int.domain.ltd` | AdGuard Home + internal Caddy instance | Internal-only services |
-| **External** | `ext.domain.ltd` | AdGuard Home + external Caddy instance | On-prem services, externally accessible via VPN |
+| **External** | `ext.domain.ltd` | AdGuard Home + external Caddy instance | On-prem services |
 | **Machine** | `idm.domain.ltd` | FreeIPA | Server hostname resolution (forward + reverse) |
 
 ---
