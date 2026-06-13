@@ -1,4 +1,4 @@
-# From DevOops to DevOps
+# Hybrid Cloud Infrastructure Migration
 
 > A DevOps portfolio project: architecting a hybrid on-prem + cloud infrastructure
 > from scratch — and documenting every decision, failure, and lesson learned along
