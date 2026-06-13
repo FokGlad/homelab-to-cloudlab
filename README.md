@@ -69,6 +69,7 @@ and a **reference** for anyone walking a similar path.
 | File | Description |
 |------|-------------|
 | [30-Lessons-learned.md](docs/30-Lessons-learned.md) | Key decisions, trade-offs, and what I'd do differently |
+| [31-Access-model.md](docs/31-Access-model.md) | Day-to-day and remote access, VPS source IP restriction, WireGuard tunnels |
 | [32-Cost-analysis.md](docs/32-Cost-analysis.md) | Honest cost breakdown: electricity, VPS, and what would actually save money |
 
 ## License

@@ -14,6 +14,7 @@
 | **VoIP** | `voip` | FreePBX and VoIP devices |
 | **IoT** | `iot` | Wireless IoT devices (isolated) |
 | **Local** | `local` | PCs, media center, game consoles |
+| **Management** | `mgmt` | Desktop PC — unrestricted access to all VLANs |
 | **WireGuard VPN** | `wg-vpn` | VPS daisy-chain termination subnet |
 | **WireGuard Admin** | `wg-admin` | Remote admin access tunnel |
 | **WireGuest** | `wg-guest` | Guest remote access (limited: certain external services only) |
@@ -58,6 +59,14 @@
 - Standard internet access
 - Can reach Internal and External VLAN services as needed
 
+### Management VLAN
+- Dedicated to the **desktop PC** used for day-to-day management
+- Unrestricted access to all VLANs — can reach Infra, Internal, External,
+  everything
+- This is the "everything is allowed" subnet
+- **Future improvement:** move the desktop to a regular subnet and restrict
+  the Management VLAN to specific admin hosts only
+
 ### WireGuard VPN VLAN
 - Dedicated subnet for the **VPS daisy-chain termination**
 - Core VPS and Edge VPS terminate their WireGuard interfaces here
@@ -94,6 +103,7 @@ Internet
 │  ├── VoIP      ───→ Internet only        │
 │  ├── IoT       ───→ Internet only        │
 │  ├── Local     ←──→ Internal, External   │
+│  ├── Mgmt      ←──→ Everything           │
 │  ├── WG-VPN    ←──→ Core/Edge VPS        │
 │  ├── WG-Admin  ←──→ Internal, Infra      │
 │  └── WG-Guest  ───→ External (limited)   │
