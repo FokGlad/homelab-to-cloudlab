@@ -35,17 +35,40 @@ Both VPS instances are updated through Ansible playbooks triggered via
 Semaphore, replacing per-machine `unattended-upgrades` cronjobs with a
 controlled, logged process.
 
+## VPS Rebuild Playbooks
+
+Both VPS instances share a **common Ansible bootstrap playbook** that handles
+initial provisioning:
+
+- Admin user creation
+- SSH hardening (non-default port, key-only, no root)
+- WireGuard tunnel setup
+- UFW configuration
+
+What comes after the bootstrap differs per instance.
+
+### Core VPS Rebuild
+
+After the bootstrap playbook:
+
+1. Install Docker Engine
+2. Deploy Portainer agent
+3. Portainer pulls Compose files from the on-prem Gitea instance
+4. All services come up from Git-controlled definitions
+
 ### Edge VPS Rebuild
 
-The Edge VPS can be fully reprovisioned from a fresh Debian install by running
-the Edge Ansible playbook. This covers:
+After the bootstrap playbook, a second playbook handles service deployment:
 
-- OS hardening (SSH, fail2ban, minimal install)
-- Service installation and systemd unit configuration
-- WireGuard tunnel setup
 - Caddy reverse proxy + TLS
-- Postfix relay configuration
-- ntfy deployment
+- Postfix relay to ProtonMail
+- ntfy push notifications
+- UFW rules
+- WireGuard tunnel to Core VPS
+- Node Exporter for Prometheus
+
+See [24-Disaster-Recovery.md](24-Disaster-Recovery.md) for the full recovery
+walkthrough.
 
 ### On-Prem Tasks
 

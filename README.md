@@ -40,7 +40,6 @@ and a **reference** for anyone walking a similar path.
 ### 0x — Introduction & Context
 | File | Description |
 |------|-------------|
-| [00-Introduction.md](00-Introduction.md) | Three acts, guiding principles |
 | [01-Motivation.md](docs/01-Motivation.md) | Energy cost, constraints, what migrated |
 
 ### 1x — Setup & Migration
@@ -58,12 +57,14 @@ and a **reference** for anyone walking a similar path.
 | [19-Monitoring.md](docs/19-Monitoring.md) | Metrics, dashboards, planned alerting |
 | [20-Backup-strategy.md](docs/20-Backup-strategy.md) | Current state and future plan |
 | [21-Automation.md](docs/21-Automation.md) | Ansible + Semaphore, replacing cronjobs |
+| [24-Security.md](docs/24-Security.md) | SSH hardening, fail2ban strategy, access model |
 
 ### 2x — Production & Roadmap
 | File | Description |
 |------|-------------|
 | [22-Production-architecture.md](docs/22-Production-architecture.md) | Final hybrid topology, service placement, security boundaries |
 | [23-Roadmap.md](docs/23-Roadmap.md) | Phase checklist, what's next, decommissioning plan |
+| [24-Disaster-Recovery.md](docs/24-Disaster-Recovery.md) | Recovery procedures, RTO, Ansible rebuild workflow |
 
 ### 3x — Deep Dives
 | File | Description |

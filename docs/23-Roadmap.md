@@ -7,7 +7,7 @@
 ## Phase 1 — Foundation ✅
 
 - [x] Two VPS provisioned from IONOS (Core + Edge)
-- [x] Both VPS hardened (key-only SSH, fail2ban, auto-updates)
+- [x] Both VPS hardened (key-only SSH, SSH through WireGuard, auto-updates)
 - [x] WireGuard daisy-chain established (on-prem ↔ Core ↔ Edge)
 - [x] Cloudflare proxy configured (replacing Cloudflare Tunnels)
 - [x] Reverse proxy (Caddy/Traefik) on Edge VPS

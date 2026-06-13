@@ -38,14 +38,21 @@ a fresh Debian install — no manual steps.
 
 ## Hardening (Both VPS)
 
-Applied immediately after provisioning:
+Applied immediately after provisioning via the shared Ansible bootstrap playbook:
 
+- **SSH port changed** from default (22) to reduce scanner noise
 - **Key-only SSH** — password authentication disabled
-- **Fail2Ban** — brute-force protection on SSH
+- **No root login** — `PermitRootLogin no`
+- **SSH through WireGuard only** — no public SSH access on either VPS (see
+  [12-WireGuard-daisy-chain.md](12-WireGuard-daisy-chain.md) and
+  [24-Security.md](docs/24-Security.md))
 - **Unattended-upgrades** — automatic security patches
 - **Minimal install** — no unnecessary packages
-- **SSH through VPN only** — no public SSH access on either VPS (see
-  [12-WireGuard-daisy-chain.md](12-WireGuard-daisy-chain.md))
+- **UFW** — deny all inbound except WireGuard and required public ports (Edge only)
+
+> **Fail2Ban:** Core VPS does not run fail2ban (no public interfaces at all).
+> Edge VPS uses fail2ban as a rate limiter for public web services, not for SSH.
+> See [24-Security.md](docs/24-Security.md) for the full rationale.
 
 ---
 

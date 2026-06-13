@@ -7,8 +7,8 @@
 
 ## Current State
 
-There is **no formal backup strategy** yet. The only real backup mechanism
-currently in place is:
+The on-prem backup pipeline is operational. The gap is off-site replication
+and long-term archival — not the core backup mechanism itself.
 
 ### VPS → On-Prem Pipeline
 
