@@ -15,14 +15,28 @@
 | **TrueNAS CORE** (bare metal) | NFS storage appliance |
 | **Windows machine** | Workstation / misc |
 
-## Network Topology
+## Network — Before
+
+The original network was simple. No VLANs — everything sat on flat subnets:
+
+| Subnet | Purpose |
+|--------|---------|
+| **DMZ** | Raspberry Pi (public-facing services via Cloudflare Tunnels) |
+| **LAN** | PCs, workstations, general devices |
+| **Infra** | All servers and VMs — Proxmox, TrueNAS, every container and VM lived here |
+| **IoT** | Wireless IoT devices |
+
+There was no segmentation between services. Every server and VM shared the
+same Infra subnet.
+
+## Network Topology — Before
 
 ```
 Internet
     │
     ▼
 ┌──────────┐
-│ OPNsense │  ← Firewall, Unbound DNS, AdGuard Home, Suricata IDS
+│ OPNsense │  ← Firewall, AdGuard Home (DNS), Unbound, Suricata
 │ (bare    │
 │  metal)  │
 └────┬─────┘
@@ -39,13 +53,29 @@ Internet
  │   │ └──────┘     │
  │   └────────────┘
  │
- ├──▶ Proxmox PVE (8 VMs, 10 LXC containers)
+ ├──▶ Infra subnet (flat — all servers, VMs, containers)
  │         │
- │         ▼
- │    TrueNAS CORE (NFS)
+ │         ├── Proxmox PVE
+ │         ├── TrueNAS CORE
+ │         ├── Proxmox Backup Server
+ │         └── All VM/CT traffic
  │
- └──▶ Proxmox Backup Server
+ └──▶ IoT subnet
 ```
+
+## DNS — Before
+
+A single **Caddy** instance served `internal.domain.ltd` for local service
+discovery. **AdGuard Home** handled DNS rewrites for `internal.domain.ltd`,
+resolving service hostnames to their local IPs.
+
+There was no split between internal and external zones — one Caddy instance,
+one domain, AdGuard doing the rewrites.
+
+> AdGuard Home still handles DNS rewrites today, now for both `int.domain.ltd`
+> and `ext.domain.ltd`. The technique survived the migration; only the zones
+> and Caddy instances changed. See [15-DNS-architecture.md](15-DNS-architecture.md)
+> for the current setup.
 
 ## Switch — Cisco SG-300
 
@@ -60,7 +90,7 @@ OPNsense runs on bare metal with the following plugins:
 | Plugin | Purpose |
 |--------|---------|
 | **Unbound** | Recursive DNS resolver (local, not forwarding) |
-| **AdGuard Home** | DNS-level ad/tracker blocking |
+| **AdGuard Home** | DNS-level ad/tracker blocking + DNS rewrites |
 | **Suricata** | Intrusion detection and prevention (IDS/IPS) |
 
 ### WireGuard on OPNsense
