@@ -18,7 +18,7 @@ TrueNAS. A **Backup relay VM** on the Internal VLAN:
 1. Picks up the data from the TrueNAS NFS share
 2. Gets itself backed up by **Proxmox Backup Server (PBS)**
 
-This gives two copies of VPS data: the original on the VPS disk, and the PBS
+This gives two copies of VPS data: the original on the NAS share, and the PBS
 backup on-prem.
 
 ```
