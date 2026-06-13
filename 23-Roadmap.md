@@ -17,7 +17,7 @@
 **Outcomes:**
 - ✅ No inbound connections to the homelab network — all public traffic terminates on Edge VPS
 - ✅ SSH accessible only through WireGuard — zero public SSH exposure across the fleet
-- ✅ VPS instances reproducible from scratch via Ansible
+- [ ] VPS instances reproducible from scratch via Ansible
 
 ---
 
@@ -64,7 +64,7 @@
 
 **Target outcomes:**
 - ⬜ Recovery time for any VPS: under 1 hour from fresh Debian install
-- ⬜ Recovery time for Proxmox node: under 12 hours (PBS restore)
+- ✅ Recovery time for Proxmox node: under 12 hours (PBS restore)
 - ⬜ Off-site copy of TrueNAS data at a separate physical location
 - ⬜ Blu-ray archival of important documents on a semi-annual schedule
 
@@ -91,11 +91,9 @@
 ## Phase 6 — Decommissioning & Optimization (Planned)
 
 - [ ] Identify candidate services for full cloud migration
-- [ ] Reduce on-prem power draw by shutting down Proxmox outside daytime hours (target: 8–10 hours/day shutdown)
+- ✅ Reduce on-prem power draw by shutting down Proxmox outside daytime hours (target: 8–10 hours/day shutdown)
 - [ ] Document lessons from each migration
-- [ ] Evaluate whether Proxmox PVE node can be retired or repurposed
 
 **Target outcomes:**
-- ⬜ On-prem power consumption reduced by ~40% (night shutdown schedule)
-- ⬜ On-prem footprint reduced to TrueNAS + PBS only (storage and backup)
+- ✅ On-prem power consumption reduced by ~40% (night shutdown schedule)
 - ⬜ Every migration documented with rationale, process, and lessons learned
