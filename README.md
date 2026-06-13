@@ -74,7 +74,7 @@ and a **reference** for anyone walking a similar path.
 
 *diagram coming soon*
 
-![Architecture Diagram](doc/architecture-diagram.png)
+![Architecture Diagram](doc/labv3.png)
 
 ## Documentation
 
