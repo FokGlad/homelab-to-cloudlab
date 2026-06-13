@@ -17,7 +17,7 @@
 **Outcomes:**
 - ✅ No inbound connections to the homelab network — all public traffic terminates on Edge VPS
 - ✅ SSH accessible only through WireGuard — zero public SSH exposure across the fleet
-- [ ] VPS instances reproducible from scratch via Ansible
+- ⬜ VPS instances reproducible from scratch via Ansible
 
 ---
 
@@ -91,7 +91,7 @@
 ## Phase 6 — Decommissioning & Optimization (Planned)
 
 - [ ] Identify candidate services for full cloud migration
-- ✅ Reduce on-prem power draw by shutting down Proxmox outside daytime hours (target: 8–10 hours/day shutdown)
+- [x] Reduce on-prem power draw by shutting down Proxmox outside daytime hours (target: 8–10 hours/day shutdown)
 - [ ] Document lessons from each migration
 
 **Target outcomes:**
