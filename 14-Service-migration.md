@@ -17,16 +17,55 @@ to the Edge VPS. Everything else stayed on-prem.
 
 ---
 
-## Mail: Postfix to ProtonMail Relay
+## Mail: Two-Tier Postfix Relay
 
 Instead of running a full mail server (with all the deliverability headaches),
-Postfix on the Edge VPS acts as a **smart relay**:
+the mail setup uses a **two-tier Postfix relay**:
 
-- Outbound mail is relayed through ProtonMail's SMTP servers
+```
+On-prem devices & VMs
+        │
+        ▼
+┌───────────────────┐
+│  Local Postfix    │  ← On-prem (Infra VLAN)
+│  (store & forward)│     Queues mail if upstream is down
+└───────┬───────────┘
+        │  Forward over WireGuard
+        ▼
+┌───────────────────┐
+│  Edge Postfix     │  ← Edge VPS (systemd)
+│  (smart relay)    │     Authenticates to ProtonMail SMTP
+└───────┬───────────┘
+        │  SMTP relay
+        ▼
+┌───────────────────┐
+│  ProtonMail SMTP  │  ← Final delivery
+└───────────────────┘
+```
+
+### Local Postfix (On-Prem)
+
+- Runs as an LXC container on the **Infra VLAN**
+- Accepts mail from on-prem devices and VMs
+- **Store-and-forward:** if the upstream (Edge VPS) is unreachable, mail
+  queues locally and retries automatically
+- Forwards to Edge Postfix over the WireGuard tunnel
+
+### Edge Postfix (Edge VPS)
+
+- Runs as a **systemd service** (not Docker — see [30-Lessons-learned.md](30-Lessons-learned.md))
+- Acts as a **smart relay** to ProtonMail's SMTP servers
+- Authenticates to ProtonMail using stored credentials
 - No need to manage DNS records for mail reputation (SPF, DKIM, DMARC)
-  beyond the basics
-- Inbound mail is handled natively by ProtonMail
-- The Edge VPS only needs to know how to authenticate to ProtonMail's SMTP
+  beyond the basics — ProtonMail handles deliverability
+- Inbound mail is handled natively by ProtonMail (not self-hosted)
+
+### Why Two Tiers?
+
+The local Postfix provides **decoupling**. If the Edge VPS is down, the
+WireGuard tunnel is broken, or ProtonMail's SMTP is temporarily unreachable,
+mail from on-prem services queues locally. Once connectivity is restored,
+delivery resumes automatically — no mail lost, no manual intervention.
 
 This was one of the clearest wins of the VPS transition — **mail without the
 pain**.
