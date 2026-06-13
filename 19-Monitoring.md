@@ -42,7 +42,7 @@ application-level metrics (Caddy request rates, error rates).
 
 Grafana is accessed **VPN-only** on the Core VPS — no public exposure.
 
-*[Architecture diagram placeholder — to be added]*
+*[Grafana dashboard - Caddy metrics](docs/grafana1.png)*
 
 ---
 
