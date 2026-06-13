@@ -73,7 +73,7 @@ For non-admin remote access (e.g., giving someone limited access):
 | Access Method | Reach | Use Case |
 |---------------|-------|----------|
 | **Desktop (Mgmt VLAN)** | Everything | Day-to-day management |
-| **WireGuard Admin** | Internal + Infra (+ Core VPS) | Remote admin (phone) |
+| **WireGuard Admin** | Everything | Remote admin (phone) |
 | **WireGuard Guest** | External VLAN (limited) | Guest access |
 
 ---
