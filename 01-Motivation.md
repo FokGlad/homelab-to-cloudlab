@@ -6,10 +6,9 @@
 
 ## The Problem: Energy Cost
 
-Running a full data center at home 24/7 is expensive. The Proxmox node, TrueNAS
-storage, switch, firewall, and a Raspberry Pi in the DMZ — all powered on
-continuously, all adding to the electricity bill. Roughly 20-25 EUR/month for
-the rack alone.
+Running a homelab 24/7 can be expensive. The Proxmox node, TrueNAS
+storage, switch, firewall — all powered on continuously, all adding
+to the electricity bill. Roughly 20-25 EUR/month for the rack alone.
 
 The instinct was simple: don't run everything at home, all the time.
 
