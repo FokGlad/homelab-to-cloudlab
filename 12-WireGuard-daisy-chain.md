@@ -19,7 +19,7 @@ Internet
     │
 ┌───▼────────────┐
 │   Core VPS     │  ← No public connections at all
-│   (IONOS)      │     Services: reverse proxy, DNS, Docker
+│   (IONOS)      │     Services: Docker workloads, monitoring
 └───┬────────────┘
     │ WireGuard (site-to-site)
     │
