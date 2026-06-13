@@ -11,9 +11,9 @@ This repository documents my journey from a fully self-hosted homelab to a
 networking decision, every failure, every fix, and every lesson learned along
 the way.
 
-**The problem:** running a full data center at home 24/7 is expensive. The
-Proxmox node, TrueNAS storage, switch, firewall, and a Raspberry Pi in the DMZ
-— all powered on continuously, all adding to the electricity bill.
+**The problem:** running a homelab 24/7 can be expensive. The
+Proxmox node, TrueNAS storage, switch, firewall — all powered on continuously, 
+all adding to the electricity bill.
 
 **The solution:** a 3-tier hybrid split. Heavy compute and storage stay on-prem
 and can be shut down at night. A cheap, lightweight Core VPS handles always-on
