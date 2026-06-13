@@ -50,15 +50,11 @@
 - [ ] Test shared VPS bootstrap playbook against a fresh instance
 - [ ] Migrate remaining on-prem cronjobs to Semaphore
 - [ ] Gitea Runner → Portainer CI/CD as Semaphore task
-- [ ] Rolling update playbooks for the fleet
 
 ## Phase 6 — Infrastructure as Code + Decommissioning (Planned)
 
-- [ ] Terraform/Pulumi definitions for VPS provisioning
-- [ ] Identify candidate services for full cloud migration
-- [ ] Reduce on-prem footprint (keep only TrueNAS + PBS for storage)
+- [ ] Identify more candidate services for full cloud migration
 - [ ] Document lessons from each migration
-- [ ] Evaluate whether Proxmox PVE node can be retired or repurposed
 
 ---
 
