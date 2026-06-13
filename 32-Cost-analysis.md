@@ -58,7 +58,7 @@ would be **modern, efficient hardware**:
 - Fewer spinning disks, more flash storage
 
 I can't afford to replace all that hardware right now. The VPS transition was
-the budget-friendly alternative: rent efficient hardware by the hour instead of
+the budget-friendly alternative: rent efficient hardware instead of
 buying it.
 
 ---
