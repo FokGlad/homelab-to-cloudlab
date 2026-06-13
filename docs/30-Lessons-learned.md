@@ -72,3 +72,8 @@ public-facing belongs on the Core VPS.
 - **Monitoring before migration.** I set up Prometheus after the migration was
   mostly done. Having metrics from the start would have made it easier to
   catch issues during the transition.
+- **Account for total cost from the start.** The hybrid transition didn't
+  reduce my monthly costs — it stayed roughly the same. The value is in
+  flexibility and capability, not savings. If cost reduction is the goal,
+  the answer is efficient hardware, not cloud migration. See
+  [32-Cost-analysis.md](docs/32-Cost-analysis.md) for the full breakdown.

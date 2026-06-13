@@ -8,13 +8,14 @@
 
 Running a full data center at home 24/7 is expensive. The Proxmox node, TrueNAS
 storage, switch, firewall, and a Raspberry Pi in the DMZ — all powered on
-continuously, all adding to the electricity bill.
+continuously, all adding to the electricity bill. Roughly 20-25 EUR/month for
+the rack alone.
 
-The obvious fix: don't run everything at home, all the time.
+The instinct was simple: don't run everything at home, all the time.
 
 ---
 
-## The Solution: 3-Tier Hybrid Architecture
+## The Goal: 3-Tier Hybrid Architecture
 
 Split the infrastructure into three tiers, each optimized for its role:
 
@@ -24,9 +25,27 @@ Split the infrastructure into three tiers, each optimized for its role:
 | **Core VPS** | Cloud (IONOS) | Always-on containerized services | 24/7 |
 | **Edge VPS** | Cloud (IONOS) | Public-facing reverse proxy + lightweight services | 24/7 |
 
-This cuts power consumption dramatically: the most expensive hardware sleeps
-when it isn't needed, while the lightweight VPS instances (cheap to run)
-handle always-on duties.
+This reduces power draw at home: the most expensive hardware sleeps when it
+isn't needed, while lightweight VPS instances handle always-on duties.
+
+---
+
+## Cost Reality Check
+
+The honest numbers:
+
+```
+Before:  ~20-25 EUR/month (electricity only)
+Now:     ~15 EUR/month (electricity) + 9 EUR/month (VPS) = ~24 EUR/month
+```
+
+The hybrid transition did **not** reduce total monthly costs. For a proper cost
+optimization, I'd need to replace the rack hardware with modern low-power
+CPUs and efficient PSUs — which I can't afford right now. The VPS approach
+was the budget-friendly alternative: rent efficient hardware by the hour.
+
+The real gains are in **flexibility and capability**, not savings. See
+[32-Cost-analysis.md](docs/32-Cost-analysis.md) for the full breakdown.
 
 ---
 

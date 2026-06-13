@@ -20,9 +20,10 @@ and can be shut down at night. A cheap, lightweight Core VPS handles always-on
 services. An Edge VPS handles public-facing traffic. The home network is never
 exposed to the internet.
 
-**the result:** lower energy costs, better uptime for critical services, stronger
-security boundaries, and a flexible infrastructure that can be rebuilt in
-minutes — not hours.
+**the result:** the monthly cost stayed roughly the same, but the infrastructure
+gained flexibility, better uptime for always-on services, stronger security
+boundaries, and the ability to rebuild VPS instances from an Ansible playbook
+in minutes — not hours. The real value is in capability, not savings.
 
 This is both a **portfolio piece** (demonstrating real-world DevOps competency)
 and a **reference** for anyone walking a similar path.
@@ -68,6 +69,7 @@ and a **reference** for anyone walking a similar path.
 | File | Description |
 |------|-------------|
 | [30-Lessons-learned.md](docs/30-Lessons-learned.md) | Key decisions, trade-offs, and what I'd do differently |
+| [32-Cost-analysis.md](docs/32-Cost-analysis.md) | Honest cost breakdown: electricity, VPS, and what would actually save money |
 
 ## License
 
