@@ -35,6 +35,45 @@ and a **reference** for anyone walking a similar path.
 - **Learn by breaking things** (on purpose), then documenting the recovery
 - Build a **reference architecture** others can learn from
 
+## Technology Stack
+
+### Infrastructure & Networking
+| Technology | Role |
+|------------|------|
+| **Proxmox VE** | On-prem hypervisor (VMs + LXC containers) |
+| **OPNsense** | Firewall, gateway, IDS/IPS, DNS (AdGuard Home + Unbound) |
+| **TrueNAS CORE** | On-prem NFS storage appliance |
+| **Cisco SG-300** | Managed switch with VLAN segmentation |
+| **IONOS VPS** | Two cloud instances — Core (6 vCPU/8 GB) + Edge (2 vCPU/2 GB) |
+| **WireGuard** | Site-to-site + remote access VPN (daisy-chain topology) |
+| **Cloudflare** | Public DNS, reverse proxy, WAF, DDoS protection |
+
+### Services & Platforms
+| Technology | Role |
+|------------|------|
+| **Docker + Compose** | Containerized workloads on Core VPS |
+| **Portainer** | Docker management UI/API |
+| **Gitea** | Self-hosted Git for all Compose files and configs |
+| **Caddy** | Reverse proxy + TLS termination (Edge + on-prem split) |
+| **FreeIPA** | Centralized SSH auth, HBAC, DNS zones for machine hostnames |
+| **Postfix** | Two-tier mail relay (on-prem → Edge → ProtonMail SMTP) |
+| **Prometheus + Grafana** | Metrics collection and dashboards |
+| **ntfy** | Push notification server |
+
+### Automation & Operations
+| Technology | Role |
+|------------|------|
+| **Ansible** | Configuration management, VPS bootstrap, service deployment |
+| **Semaphore** | Ansible web UI for scheduling, execution, and audit logging |
+| **Proxmox Backup Server (PBS)** | Daily VM/CT backup and restore |
+| **UFW** | Host-based firewall on all VPS and on-prem hosts |
+| **AdGuard Home** | DNS-level ad/tracker blocking + zone rewrites |
+| **Unbound** | Recursive DNS resolver with DNS over TLS |
+
+## Architecture Diagram
+
+*[Architecture diagram placeholder — to be added]*
+
 ## Documentation
 
 ### 0x — Introduction & Context

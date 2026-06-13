@@ -14,12 +14,26 @@
 - [x] DNS, TLS configured
 - [x] Docker stacks running on Core VPS, Git-controlled
 
+**Outcomes:**
+- ✅ No inbound connections to the homelab network — all public traffic terminates on Edge VPS
+- ✅ SSH accessible only through WireGuard — zero public SSH exposure across the fleet
+- ✅ VPS instances reproducible from scratch via Ansible
+
+---
+
 ## Phase 2 — Service Migration ✅
 
 - [x] Services migrated from DMZ Pi and Proxmox to VPS (always-on availability)
 - [x] Postfix migrated to Edge VPS (ProtonMail relay)
 - [x] FreeIPA realm established on-prem (Internal VLAN)
 - [x] All machines joined to FreeIPA (SSH auth, DNS zones, HBAC)
+
+**Outcomes:**
+- ✅ Always-on services (SeaFile, Synapse, Vikunja, etc.) run independently of home power and ISP
+- ✅ Centralized SSH authentication — no more per-machine `authorized_keys` management
+- ✅ DMZ Raspberry Pi decommissioned — one less device to maintain and secure
+
+---
 
 ## Phase 3 — Monitoring & Alerting (In Progress)
 
@@ -33,12 +47,28 @@
 - [ ] Service downtime alerts
 - [ ] Notification target decision (ntfy vs. email)
 
-## Phase 4 — Backup Strategy (Planned)
+**Target outcomes:**
+- ⬜ Alert on any node going down within 5 minutes
+- ⬜ Alert on disk usage above 85% on any VPS or on-prem host
+- ⬜ WireGuard tunnel connectivity loss detected and notified
+
+---
+
+## Phase 4 — Backup Strategy (In Progress)
 
 - [x] VPS data pushed to TrueNAS NFS share → Backup relay VM → PBS
+- [x] Proxmox VMs/CTs backed up daily to PBS
 - [ ] Off-site TrueNAS replication (ZFS send/receive)
 - [ ] Blu-ray archival for important documents
 - [ ] Define retention policy and replication schedule
+
+**Target outcomes:**
+- ⬜ Recovery time for any VPS: under 1 hour from fresh Debian install
+- ⬜ Recovery time for Proxmox node: under 12 hours (PBS restore)
+- ⬜ Off-site copy of TrueNAS data at a separate physical location
+- ⬜ Blu-ray archival of important documents on a semi-annual schedule
+
+---
 
 ## Phase 5 — Automation (In Progress)
 
@@ -51,11 +81,21 @@
 - [ ] Migrate remaining on-prem cronjobs to Semaphore
 - [ ] Gitea Runner → Portainer CI/CD as Semaphore task
 
-## Phase 6 — Infrastructure as Code + Decommissioning (Planned)
-
-- [ ] Identify more candidate services for full cloud migration
-- [ ] Document lessons from each migration
+**Target outcomes:**
+- ⬜ Full VPS rebuild (bootstrap + services) in under 30 minutes, zero manual steps
+- ⬜ All infrastructure changes version-controlled and auditable via Semaphore
+- ⬜ GitOps workflow: push to Gitea → automatic redeploy via Portainer
 
 ---
 
-*Last updated: June 2026.*
+## Phase 6 — Decommissioning & Optimization (Planned)
+
+- [ ] Identify candidate services for full cloud migration
+- [ ] Reduce on-prem power draw by shutting down Proxmox outside daytime hours (target: 8–10 hours/day shutdown)
+- [ ] Document lessons from each migration
+- [ ] Evaluate whether Proxmox PVE node can be retired or repurposed
+
+**Target outcomes:**
+- ⬜ On-prem power consumption reduced by ~40% (night shutdown schedule)
+- ⬜ On-prem footprint reduced to TrueNAS + PBS only (storage and backup)
+- ⬜ Every migration documented with rationale, process, and lessons learned
