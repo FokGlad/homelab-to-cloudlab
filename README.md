@@ -72,7 +72,9 @@ and a **reference** for anyone walking a similar path.
 
 ## Architecture Diagram
 
-*[Architecture diagram placeholder — to be added]*
+*diagram coming soon*
+
+![Architecture Diagram](doc/architecture-diagram.png)
 
 ## Documentation
 
