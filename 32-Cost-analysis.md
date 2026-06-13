@@ -50,15 +50,16 @@ reduce my costs.
 ## What Would Actually Have Saved Money
 
 The energy draw comes from the hardware itself — an Intel i5-10600K, a discrete
-GPU in the Proxmox node, an old TrueNAS box with spinning disks. The real fix
-would be **modern, efficient hardware**:
+GPU in the Proxmox node, an old TrueNAS box with spinning disks, a managed
+switch, and an OPNsense box. The real fix would be **modern, efficient
+hardware**:
 
 - Low-power CPU (Intel T-series, ARM, or similar)
 - 80+ Platinum/Titanium PSUs instead of older units
 - Fewer spinning disks, more flash storage
 
 I can't afford to replace all that hardware right now. The VPS transition was
-the budget-friendly alternative: rent efficient hardware instead of
+the budget-friendly alternative: rent efficient hardware by the hour instead of
 buying it.
 
 ---

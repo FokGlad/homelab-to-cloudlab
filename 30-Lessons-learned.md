@@ -81,4 +81,5 @@ public-facing belongs on the Core VPS.
   from my desktop PC's IP over the WireGuard tunnel. It felt like the ultimate
   security measure, but it's counterproductive: if the desktop is offline, I
   lose all VPS access. The WireGuard tunnel alone is sufficient
-  authentication. See [31-Access-model.md](31-Access-model.md).
+  authentication. This restriction is still in place and pending removal.
+  See [31-Access-model.md](31-Access-model.md).

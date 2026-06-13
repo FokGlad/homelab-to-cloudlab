@@ -43,8 +43,11 @@
 ## Phase 5 — Automation (In Progress)
 
 - [x] Semaphore running on-prem as Ansible web UI
+- [x] Shared VPS bootstrap playbook (user creation, SSH hardening, WireGuard) — written but **untested**
 - [x] Edge VPS rebuild playbook (full reprovisioning from scratch)
 - [x] VPS update playbooks via Semaphore (replacing ad-hoc cronjobs)
+- [x] On-prem VMs/servers use Ansible for automated updates
+- [ ] Test shared VPS bootstrap playbook against a fresh instance
 - [ ] Migrate remaining on-prem cronjobs to Semaphore
 - [ ] Gitea Runner → Portainer CI/CD as Semaphore task
 - [ ] Rolling update playbooks for the fleet
@@ -52,7 +55,6 @@
 ## Phase 6 — Infrastructure as Code + Decommissioning (Planned)
 
 - [ ] Terraform/Pulumi definitions for VPS provisioning
-- [ ] Ansible playbooks for on-prem OS hardening and service deployment
 - [ ] Identify candidate services for full cloud migration
 - [ ] Reduce on-prem footprint (keep only TrueNAS + PBS for storage)
 - [ ] Document lessons from each migration

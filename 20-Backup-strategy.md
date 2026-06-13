@@ -10,28 +10,31 @@
 The on-prem backup pipeline is operational. The gap is off-site replication
 and long-term archival — not the core backup mechanism itself.
 
-### VPS → On-Prem Pipeline
+### Core VPS & Edge VPS — Scripted Backup
 
-Each VPS runs a script that **pushes data to an NFS share** on the on-prem
-TrueNAS. A **Backup relay VM** on the Internal VLAN:
+Both VPS instances run the **same backup script**. The script archives important
+directories (`/etc`, `/opt`) and pushes them to an NFS share on the on-prem
+TrueNAS.
 
-1. Picks up the data from the TrueNAS NFS share
-2. Gets itself backed up by **Proxmox Backup Server (PBS)**
-
-This gives two copies of VPS data: the original on the NAS share, and the PBS
-backup on-prem.
+On the Core VPS, every Docker container is configured with a mountpoint to
+local storage — this is what the script backs up.
 
 ```
 Edge VPS ──┐
-            ├──▶ Script → NFS share (TrueNAS) → Backup relay VM → PBS
+            ├──▶ Backup script → NFS share (TrueNAS) → Backup relay VM → PBS
 Core VPS ──┘
 ```
 
+### Proxmox — PBS
+
+All VMs and LXC containers on the Proxmox node are backed up daily to
+Proxmox Backup Server (PBS).
+
 ### What's Covered
 
-| Data | Backed up | Method |
+| Data | Backed Up | Method |
 |------|-----------|--------|
-| VPS application data | ✅ | Script → NFS → PBS |
+| VPS application data (`/etc`, `/opt`, container storage) | ✅ | Script → NFS → PBS |
 | Proxmox VMs/CTs | ✅ | PBS (local backup) |
 | TrueNAS data | ❌ | No off-site copy |
 | Configs / Compose files | ✅ | Gitea (Git, on-prem) |
@@ -80,7 +83,3 @@ Blu-ray discs ← Important documents (offline, off-site)
 - **Retention:** how long to keep ZFS snapshots on the off-site TrueNAS
 - **Blu-ray schedule:** quarterly? semi-annually?
 - **Off-site location:** still being arranged
-
----
-
-*Last updated: June 2026.*
