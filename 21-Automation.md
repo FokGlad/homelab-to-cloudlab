@@ -67,7 +67,7 @@ After the bootstrap playbook, a second playbook handles service deployment:
 - WireGuard tunnel to Core VPS
 - Node Exporter for Prometheus
 
-See [24-Disaster-Recovery.md](24-Disaster-Recovery.md) for the full recovery
+See [25-Disaster-Recovery.md](25-Disaster-Recovery.md) for the full recovery
 walkthrough.
 
 ### On-Prem Tasks

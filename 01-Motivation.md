@@ -45,7 +45,7 @@ CPUs and efficient PSUs — which I can't afford right now. The VPS approach
 was the budget-friendly alternative: rent efficient hardware by the hour.
 
 The real gains are in **flexibility and capability**, not savings. See
-[32-Cost-analysis.md](docs/32-Cost-analysis.md) for the full breakdown.
+[32-Cost-analysis.md](32-Cost-analysis.md) for the full breakdown.
 
 ---
 

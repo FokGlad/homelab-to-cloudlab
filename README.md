@@ -15,12 +15,12 @@ the way.
 Proxmox node, TrueNAS storage, switch, firewall, and a Raspberry Pi in the DMZ
 — all powered on continuously, all adding to the electricity bill.
 
-**the solution:** a 3-tier hybrid split. Heavy compute and storage stay on-prem
+**The solution:** a 3-tier hybrid split. Heavy compute and storage stay on-prem
 and can be shut down at night. A cheap, lightweight Core VPS handles always-on
 services. An Edge VPS handles public-facing traffic. The home network is never
 exposed to the internet.
 
-**the result:** the monthly cost stayed roughly the same, but the infrastructure
+**The result:** the monthly cost stayed roughly the same, but the infrastructure
 gained flexibility, better uptime for always-on services, stronger security
 boundaries, and the ability to rebuild VPS instances from an Ansible playbook
 in minutes — not hours. The real value is in capability, not savings.
@@ -40,38 +40,38 @@ and a **reference** for anyone walking a similar path.
 ### 0x — Introduction & Context
 | File | Description |
 |------|-------------|
-| [01-Motivation.md](docs/01-Motivation.md) | Energy cost, constraints, what migrated |
+| [01-Motivation.md](01-Motivation.md) | Energy cost, constraints, what migrated |
 
 ### 1x — Setup & Migration
 | File | Description |
 |------|-------------|
-| [10-Homelab-hardware.md](docs/10-Homelab-hardware.md) | Original on-prem hardware, network, DMZ Pi |
-| [11-VPS-provisioning.md](docs/11-VPS-provisioning.md) | IONOS VPS specs, hardening |
-| [12-WireGuard-daisy-chain.md](docs/12-WireGuard-daisy-chain.md) | WireGuard topology, SSH-only access, security model |
-| [13-Core-VPS-services.md](docs/13-Core-VPS-services.md) | Core VPS workloads: containers, monitoring, SeaFile |
-| [14-Service-migration.md](docs/14-Service-migration.md) | What moved where, FreeIPA, Postfix relay, Cloudflare proxy |
-| [15-DNS-architecture.md](docs/15-DNS-architecture.md) | Four DNS zones, Caddy split, resolution flow |
-| [16-Networking.md](docs/16-Networking.md) | VLAN layout, firewall rules, switch config |
-| [17-Docker-management.md](docs/17-Docker-management.md) | Compose files, Portainer, Gitea, planned CI/CD |
-| [18-Proxmox-inventory.md](docs/18-Proxmox-inventory.md) | Full VM/CT inventory, VLAN distribution |
-| [19-Monitoring.md](docs/19-Monitoring.md) | Metrics, dashboards, planned alerting |
-| [20-Backup-strategy.md](docs/20-Backup-strategy.md) | Current state and future plan |
-| [21-Automation.md](docs/21-Automation.md) | Ansible + Semaphore, replacing cronjobs |
-| [24-Security.md](docs/24-Security.md) | SSH hardening, fail2ban strategy, access model |
+| [10-Homelab-hardware.md](10-Homelab-hardware.md) | Original on-prem hardware, network, DMZ Pi |
+| [11-VPS-provisioning.md](11-VPS-provisioning.md) | IONOS VPS specs, hardening |
+| [12-WireGuard-daisy-chain.md](12-WireGuard-daisy-chain.md) | WireGuard topology, SSH-only access, security model |
+| [13-Core-VPS-services.md](13-Core-VPS-services.md) | Core VPS workloads: containers, monitoring, SeaFile |
+| [14-Service-migration.md](14-Service-migration.md) | What moved where, FreeIPA, Postfix relay, Cloudflare proxy |
+| [15-DNS-architecture.md](15-DNS-architecture.md) | Four DNS zones, Caddy split, resolution flow |
+| [16-Networking.md](16-Networking.md) | VLAN layout, firewall rules, switch config |
+| [17-Docker-management.md](17-Docker-management.md) | Compose files, Portainer, Gitea, planned CI/CD |
+| [18-Proxmox-inventory.md](18-Proxmox-inventory.md) | Full VM/CT inventory, VLAN distribution |
+| [19-Monitoring.md](19-Monitoring.md) | Metrics, dashboards, planned alerting |
+| [20-Backup-strategy.md](20-Backup-strategy.md) | Current state and future plan |
+| [21-Automation.md](21-Automation.md) | Ansible + Semaphore, replacing cronjobs |
 
-### 2x — Production & Roadmap
+### 2x — Production & Operations
 | File | Description |
 |------|-------------|
-| [22-Production-architecture.md](docs/22-Production-architecture.md) | Final hybrid topology, service placement, security boundaries |
-| [23-Roadmap.md](docs/23-Roadmap.md) | Phase checklist, what's next, decommissioning plan |
-| [24-Disaster-Recovery.md](docs/24-Disaster-Recovery.md) | Recovery procedures, RTO, Ansible rebuild workflow |
+| [22-Production-architecture.md](22-Production-architecture.md) | Final hybrid topology, service placement, security boundaries |
+| [23-Roadmap.md](23-Roadmap.md) | Phase checklist, what's next, decommissioning plan |
+| [24-Security.md](24-Security.md) | SSH hardening, fail2ban strategy, access model |
+| [25-Disaster-Recovery.md](25-Disaster-Recovery.md) | Recovery procedures, RTO, Ansible rebuild workflow |
 
 ### 3x — Deep Dives
 | File | Description |
 |------|-------------|
-| [30-Lessons-learned.md](docs/30-Lessons-learned.md) | Key decisions, trade-offs, and what I'd do differently |
-| [31-Access-model.md](docs/31-Access-model.md) | Day-to-day and remote access, VPS source IP restriction, WireGuard tunnels |
-| [32-Cost-analysis.md](docs/32-Cost-analysis.md) | Honest cost breakdown: electricity, VPS, and what would actually save money |
+| [30-Lessons-learned.md](30-Lessons-learned.md) | Key decisions, trade-offs, and what I'd do differently |
+| [31-Access-model.md](31-Access-model.md) | Day-to-day and remote access, VPS source IP restriction, WireGuard tunnels |
+| [32-Cost-analysis.md](32-Cost-analysis.md) | Honest cost breakdown: electricity, VPS, and what would actually save money |
 
 ## License
 

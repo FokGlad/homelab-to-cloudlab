@@ -103,7 +103,7 @@ For detailed service lists, see:
   exposed.
 
 For SSH hardening details (port, key-only, no root) and fail2ban strategy, see
-[24-Security.md](docs/24-Security.md). For VLAN-level segmentation details, see
+[24-Security.md](24-Security.md). For VLAN-level segmentation details, see
 [16-Networking.md](16-Networking.md).
 
 ## DNS Flow

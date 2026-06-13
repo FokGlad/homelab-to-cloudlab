@@ -76,9 +76,9 @@ public-facing belongs on the Core VPS.
   reduce my monthly costs — it stayed roughly the same. The value is in
   flexibility and capability, not savings. If cost reduction is the goal,
   the answer is efficient hardware, not cloud migration. See
-  [32-Cost-analysis.md](docs/32-Cost-analysis.md) for the full breakdown.
+  [32-Cost-analysis.md](32-Cost-analysis.md) for the full breakdown.
 - **Don't over-restrict VPS access.** I set up the VPS to only accept SSH
   from my desktop PC's IP over the WireGuard tunnel. It felt like the ultimate
   security measure, but it's counterproductive: if the desktop is offline, I
   lose all VPS access. The WireGuard tunnel alone is sufficient
-  authentication. See [31-Access-model.md](docs/31-Access-model.md).
+  authentication. See [31-Access-model.md](31-Access-model.md).

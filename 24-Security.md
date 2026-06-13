@@ -70,4 +70,4 @@ applied to any new host):
 5. Configure UFW (deny all inbound except WireGuard + required public ports)
 
 See [21-Automation.md](21-Automation.md) for the full automation workflow, and
-[24-Disaster-Recovery.md](24-Disaster-Recovery.md) for rebuild procedures.
+[25-Disaster-Recovery.md](25-Disaster-Recovery.md) for rebuild procedures.
