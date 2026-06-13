@@ -76,12 +76,20 @@ ssh user@core-vps.idm.domain.ltd
 
 ---
 
-## AdGuard Home — DNS Rewrites
+## AdGuard Home — DNS Rewrites & Forwarding
 
 AdGuard Home has been part of the DNS setup since before the hybrid transition.
 Originally it handled rewrites for a single `internal.domain.ltd` zone. Today
-it handles rewrites for **both** `int.domain.ltd` and `ext.domain.ltd` — same
-technique, expanded scope.
+it handles **three** local zones:
+
+| Zone | Action | Target |
+|------|--------|--------|
+| `int.domain.ltd` | DNS rewrite | Internal Caddy IP |
+| `ext.domain.ltd` | DNS rewrite | External Caddy IP |
+| `idm.domain.ltd` | Forward | FreeIPA DNS |
+
+Anything that doesn't match a local zone is forwarded to **Unbound** for
+recursive resolution via DNS over TLS.
 
 The two on-prem Caddy instances (internal and external) serve the actual
 services. AdGuard handles the name resolution; Caddy handles the HTTP routing
@@ -105,19 +113,70 @@ and vice versa — true DNS-level separation matching the VLAN boundaries.
 
 ## Resolution Flow
 
+Every DNS query from a device on the home network follows this path:
+
 ```
-User → service.domain.ltd
-  └→ Cloudflare DNS → Edge VPS (public)
-
-User (on LAN) → app.int.domain.ltd
-  └→ AdGuard rewrite → Internal Caddy → Internal VLAN service
-
-User (admin VPN) → app.int.domain.ltd
-  └→ WireGuard admin tunnel → AdGuard rewrite → Internal Caddy → Internal VLAN service
-
-User (LAN or ext VPN) → service.ext.domain.ltd
-  └→ AdGuard rewrite → External Caddy → External VLAN service
-
-Any FreeIPA machine → server.idm.domain.ltd
-  └→ FreeIPA DNS → IP (forward or reverse)
+Device
+  │
+  ▼
+┌─────────────────────────────────────────────────────┐
+│  AdGuard Home (on OPNsense)                         │
+│                                                     │
+│  1. Check local cache                               │
+│  2. Apply filtering (ad/tracker blocking)           │
+│  3. Zone-based routing:                             │
+│     ├─ int.domain.ltd  → rewrite to Internal Caddy  │
+│     ├─ ext.domain.ltd  → rewrite to External Caddy  │
+│     └─ idm.domain.ltd  → forward to FreeIPA DNS     │
+│  4. Unknown/unmatched → forward to Unbound          │
+└──────────────────────┬──────────────────────────────┘
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+     ┌──────────────┐   ┌──────────────┐
+     │  Unbound DNS │   │  Zone target │
+     │  (on OPNsense│   │  (Caddy /    │
+     │   DoT to     │   │   FreeIPA)   │
+     │   upstream)  │   └──────────────┘
+     └──────────────┘
 ```
+
+### Step by Step
+
+1. **Device** sends DNS query to AdGuard Home (configured as DNS server via DHCP on all VLANs)
+2. **AdGuard Home** checks its cache and applies filtering rules (ad/tracker blocking)
+3. **Zone dispatch** — AdGuard matches the requested domain against its configured zones:
+   - `*.int.domain.ltd` → DNS rewrite to the **Internal Caddy** IP
+   - `*.ext.domain.ltd` → DNS rewrite to the **External Caddy** IP
+   - `*.idm.domain.ltd` → forwarded to **FreeIPA DNS** (which holds forward + reverse records for all machine hostnames)
+4. **Fallback** — anything that doesn't match a local zone is forwarded to **Unbound**, which resolves it via **DNS over TLS** to upstream resolvers
+5. **Response** flows back through the same chain to the device
+
+### Public Queries (Cloudflare)
+
+External clients resolve `domain.ltd` through **Cloudflare** (authoritative + proxy), completely bypassing the on-prem DNS chain. Cloudflare points to the Edge VPS IP.
+
+```bash
+# Example: on-prem device resolves an internal host
+$ dig app.int.domain.ltd
+# → AdGuard rewrite → Internal Caddy IP (e.g. 10.0.10.5)
+
+# Example: any device resolves a machine hostname
+$ dig proxmox.idm.domain.ltd
+# → AdGuard forwards to FreeIPA → 10.0.20.10
+
+# Example: any device resolves a public service
+$ dig service.domain.ltd
+# → AdGuard forwards to Unbound → resolves via Cloudflare → Edge VPS IP
+
+# Example: query for an unknown external domain
+$ dig example.com
+# → AdGuard cache miss → Unbound → DoT to upstream → resolved
+```
+
+### Key Points
+
+- **AdGuard Home is the single entry point** for all on-prem DNS — devices never query Unbound or FreeIPA directly
+- **Filtering and caching happen first** — every query benefits from ad-blocking and cached responses regardless of destination
+- **DNS over TLS** ensures queries that leave the network (via Unbound) are encrypted in transit to upstream resolvers
+- **FreeIPA DNS is authoritative only for `idm.domain.ltd`** — AdGuard forwards, it doesn't query FreeIPA for other zones
