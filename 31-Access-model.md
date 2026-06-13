@@ -49,20 +49,13 @@ primary path:
 
 - Designed for a **single host** — a phone
 - Terminates on the **WireGuard Admin VLAN**
-- Gives access to:
-  - **Internal VLAN** — FreeIPA, Caddy int, n8n, App-srv, Home Assistant, etc.
-  - **Infra VLAN** — Portainer, Gitea, Core VPS (via IP forwarding through Core)
+- Gives access to everything
 
 From the phone, you SSH to machines using FreeIPA hostnames:
 ```bash
 ssh user@proxmox.idm.domain.ltd
 ssh user@core-vps.idm.domain.ltd
 ```
-
-The admin tunnel does **not** give access to the External VLAN or the Edge
-VPS directly. The Edge VPS is only reachable through the Core VPS (daisy-chain
-+ IP forwarding).
-
 ---
 
 ## Guest Access: WireGuard Guest Tunnel
