@@ -22,7 +22,7 @@
                          ┌──────▼──────┐
                          │  Edge VPS   │
                          │             │
-                         │  - Reverse  │ → Caddy/Traefik
+                         │  - Reverse  │ → Caddy
                          │    proxy    │
                          │  - Mail     │ → ProtonMail SMTP relay
                          │    relay    │
